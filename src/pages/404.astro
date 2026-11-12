@@ -1,7 +1,7 @@
 ---
 import Base from '@/layouts/Base.astro';
 import Arrow from '@/components/Arrow.astro';
-import { getCopy } from '@/i18n';
+import { getCopy, href } from '@/i18n';
 const t = getCopy('en');
 ---
 <Base lang="en" path="/" title={`${t.notFound.title} | Infinity Analytics`}>
@@ -10,7 +10,7 @@ const t = getCopy('en');
       <p class="display em" style="font-size:clamp(6rem,22vw,16rem)">404</p>
       <h1 class="h2 mt-4">{t.notFound.title}</h1>
       <p class="lead mt-4">{t.notFound.sub}</p>
-      <a class="btn btn-primary mt-9" href="/">{t.notFound.home}<Arrow /></a>
+      <a class="btn btn-primary mt-9" href={href('/', 'en')}>{t.notFound.home}<Arrow /></a>
     </div>
   </section>
 </Base>
