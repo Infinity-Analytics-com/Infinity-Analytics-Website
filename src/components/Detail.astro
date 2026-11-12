@@ -1,0 +1,105 @@
+---
+// Shared detail page for services, solutions, technologies and training courses.
+import Base from '@/layouts/Base.astro';
+import Arrow from '@/components/Arrow.astro';
+import CTA from '@/components/CTA.astro';
+import ServiceViz from '@/components/ServiceViz.astro';
+import Showcase from '@/components/Showcase.astro';
+import { mocks, showcaseFor } from '@/mocks';
+import { getCopy, href, itemHref, itemPath, type Lang } from '@/i18n';
+interface Props { lang: Lang; slug: string }
+const { lang, slug } = Astro.props;
+const t = getCopy(lang);
+const items = t.services.items;
+const s = items.find((i) => i.slug === slug)!;
+const group = items.filter((i) => i.kind === s.kind);
+const next = group[(group.indexOf(s) + 1) % group.length];
+const isCourse = s.kind === 'training' && s.slug !== 'training';
+const courses = s.slug === 'training' ? group.filter((i) => i.slug !== 'training') : [];
+const home = href('/', lang);
+const back =
+  s.kind === 'product' ? { to: home + '#solutions', label: t.nav.solutions }
+  : s.kind === 'technology' ? { to: home + '#technologies', label: t.nav.technologies }
+  : isCourse ? { to: href('/training', lang), label: t.nav.allTraining }
+  : { to: home + '#services', label: t.services.all };
+---
+<Base lang={lang} path={itemPath(s)} title={`${s.name} | Infinity Analytics`} description={s.short}>
+  <section class="relative pt-40 pb-16 md:pt-48">
+    <div class="hero-grid"></div>
+    <div class="wrap relative grid gap-12 lg:grid-cols-[1.25fr_1fr] lg:items-end">
+      <div>
+        <a class="eyebrow hover:text-text transition-colors" href={back.to} data-reveal>← {back.label}</a>
+        <h1 class="display split mt-7">{s.name}</h1>
+        <p class="lead mt-8 max-w-2xl" data-reveal>{s.intro}</p>
+        <div class="mt-10 flex flex-wrap items-center gap-x-5 gap-y-3" data-reveal>
+          <a class="btn btn-primary" data-magnetic href={href('/contact', lang)}>{t.hero.primary}<Arrow /></a>
+          <span class="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted">{t.credentials.partner}</span>
+        </div>
+      </div>
+      <div class="card p-4" data-reveal>
+        {s.kind === 'product'
+          ? <div class="viz mockviz" set:html={mocks[showcaseFor[s.slug][0]].svg} />
+          : <div class="[&_.viz]:h-56 md:[&_.viz]:h-64"><ServiceViz slug={s.kind === 'training' ? 'training' : s.slug} /></div>}
+      </div>
+    </div>
+  </section>
+
+  {courses.length > 0 && (
+    <section class="section !pt-10 !pb-0">
+      <div class="wrap grid gap-4 md:grid-cols-3">
+        {courses.map((c) => (
+          <a class="card p-7 flex flex-col group" href={itemHref(c, lang)} data-reveal>
+            <span class="chip self-start">{c.tag}</span>
+            <h2 class="h3 mt-6">{c.name}</h2>
+            <p class="mt-3 text-muted leading-relaxed text-[0.97rem]">{c.short}</p>
+            <span class="mt-auto pt-6 inline-flex items-center gap-2 text-sm text-soft group-hover:text-text transition-colors">{t.services.more}<span class="transition-transform group-hover:translate-x-1"><Arrow /></span></span>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <section class="section !pt-10">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>{isCourse ? t.services.learn : t.services.deliverables}</p>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        {s.deliverables.map((d, i) => (
+          <div class="card p-7" data-reveal>
+            <span class="font-mono text-xs text-amber">0{i + 1}</span>
+            <h2 class="h3 mt-6">{d.t}</h2>
+            <p class="mt-3 text-muted leading-relaxed">{d.d}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-20 grid gap-12 lg:grid-cols-2">
+        <div>
+          <p class="eyebrow" data-reveal>{t.services.outcomes}</p>
+          <ul class="mt-8">
+            {s.outcomes.map((o) => (
+              <li class="flex items-start gap-4 py-5 border-t border-line text-xl md:text-2xl tracking-tight" data-reveal>
+                <svg class="mt-1.5 shrink-0 text-amber" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m4 10.5 4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                {o}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p class="eyebrow" data-reveal>{t.services.stack}</p>
+          <div class="mt-8 flex flex-wrap gap-2.5" data-reveal>
+            {s.stack.map((x) => <span class="chip !text-sm !px-4 !py-2.5">{x}</span>)}
+          </div>
+          <p class="mt-6 text-sm text-muted" data-reveal>{t.credentials.certified}</p>
+          <a class="card mt-8 p-7 flex items-center justify-between gap-6 group" href={itemHref(next, lang)} data-reveal>
+            <span><span class="font-mono text-xs text-muted uppercase tracking-widest">{t.services.next}</span><span class="block h3 mt-2">{next.name}</span></span>
+            <span class="grid place-items-center w-12 h-12 rounded-full border border-line transition-all group-hover:bg-brand group-hover:border-violet group-hover:text-white"><Arrow /></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Showcase t={t} page={s.slug} />
+
+  <CTA lang={lang} t={t} />
+</Base>

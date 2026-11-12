@@ -1,0 +1,7 @@
+---
+import Detail from '@/components/Detail.astro';
+import { itemPaths, resolveLang } from '@/i18n';
+export const getStaticPaths = () => itemPaths((i) => i.kind === 'training' && i.slug !== 'training', (i) => i.slug.replace(/-training$/, ''));
+const { slug } = Astro.props;
+---
+<Detail lang={resolveLang(Astro.params.lang)} slug={slug} />

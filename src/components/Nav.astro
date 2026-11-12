@@ -1,16 +1,25 @@
 ---
 import Logo from './Logo.astro';
 import Arrow from './Arrow.astro';
-import { href, langs, langNames, type Lang } from '@/i18n';
+import { href, itemHref, langs, langNames, type Lang } from '@/i18n';
 import type { Copy } from '@/i18n/en';
 interface Props { lang: Lang; t: Copy; path: string }
 const { lang, t, path } = Astro.props;
 const home = href('/', lang);
-const links = [
-  { label: t.nav.services, to: home + '#services' },
-  { label: t.nav.approach, to: home + '#approach' },
-  { label: t.nav.products, to: home + '#products' },
-  { label: t.nav.clients, to: home + '#clients' },
+const items = t.services.items;
+const link = (i: (typeof items)[number]) => ({ label: i.name, to: itemHref(i, lang) });
+const of = (kind: string) => items.filter((i) => i.kind === kind);
+const courses = of('training').filter((i) => i.slug !== 'training');
+
+type Col = { title?: string; links: { label: string; to: string }[] };
+const menu: { label: string; to: string; cols?: Col[] }[] = [
+  { label: t.nav.home, to: home },
+  { label: t.nav.services, to: home + '#services', cols: [
+    { title: t.nav.consulting, links: of('service').map(link) },
+    { title: t.nav.solutions, links: of('product').map(link) },
+  ] },
+  { label: t.nav.technologies, to: home + '#technologies', cols: [{ links: of('technology').map(link) }] },
+  { label: t.nav.training, to: href('/training', lang), cols: [{ links: [...courses.map(link), { label: t.nav.allTraining, to: href('/training', lang) }] }] },
   { label: t.nav.contact, to: href('/contact', lang) },
 ];
 ---
@@ -18,8 +27,24 @@ const links = [
   <div class="wrap">
     <div class="nav-inner">
       <a href={home} aria-label="Infinity Analytics"><Logo /></a>
-      <nav class="hidden lg:flex items-center gap-1" aria-label="Main">
-        {links.map((l) => <a class="nav-link" href={l.to}>{l.label}</a>)}
+      <nav class="nav-desktop items-center gap-1" aria-label="Main">
+        {menu.map((m) => m.cols ? (
+          <div class="nav-item">
+            <a class="nav-link" href={m.to} aria-haspopup="true">{m.label}
+              <svg class="chev" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="m2 3.5 3 3 3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <div class="nav-drop">
+              <div class:list={['nav-panel', m.cols.length > 1 && 'two']}>
+                {m.cols.map((c) => (
+                  <div>
+                    {c.title && <p class="nav-col-title">{c.title}</p>}
+                    <ul>{c.links.map((l) => <li><a class="nav-sub" href={l.to}>{l.label}<Arrow /></a></li>)}</ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : <a class="nav-link" href={m.to}>{m.label}</a>)}
       </nav>
       <div class="flex items-center gap-2">
         {langs.length > 1 && (
@@ -40,8 +65,17 @@ const links = [
     </div>
   </div>
 </header>
-<div class="mobile-menu" id="mobile-menu">
-  {links.map((l) => <a class="big" href={l.to}>{l.label}</a>)}
+<div class="mobile-menu" id="mobile-menu" data-lenis-prevent>
+  {menu.map((m) => (
+    <div class="mm-group">
+      <a class="big" href={m.to}>{m.label}</a>
+      {m.cols && (
+        <div class="mm-subs">
+          {m.cols.flatMap((c) => c.links).map((l) => <a href={l.to}>{l.label}</a>)}
+        </div>
+      )}
+    </div>
+  ))}
   <div class="mt-8 flex items-center gap-3">
     <a class="btn btn-primary" href={href('/contact', lang)}>{t.nav.cta}<Arrow /></a>
     {langs.filter((l) => l !== lang).map((l) => <a class="btn btn-ghost" href={href(path, l)} hreflang={l}>{langNames[l]}</a>)}

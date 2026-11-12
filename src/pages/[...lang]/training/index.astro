@@ -1,0 +1,6 @@
+---
+import Detail from '@/components/Detail.astro';
+import { langPaths, resolveLang } from '@/i18n';
+export const getStaticPaths = langPaths;
+---
+<Detail lang={resolveLang(Astro.params.lang)} slug="training" />

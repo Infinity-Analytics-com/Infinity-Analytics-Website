@@ -72,6 +72,20 @@ const V = '#8B5CFF', A = '#FEB85D', L = 'rgba(255,255,255,.14)', T = 'rgba(255,2
       <line x1="196" x2="196" y1="18" y2="132" stroke={L} />
     </svg>
   )}
+  {slug === 'microsoft-azure' && (
+    <svg viewBox="0 0 320 150" preserveAspectRatio="xMidYMid meet">
+      <path d="M118 62a22 22 0 0 1 42-9 17 17 0 0 1 30 8 15 15 0 0 1 2 30h-70a15 15 0 0 1-4-29Z" fill="rgba(139,92,255,.18)" stroke={V} stroke-width="1.4" />
+      <circle class="pulse" cx="160" cy="68" r="6" fill={A} />
+      {[[60, 'APP'], [160, 'API'], [260, 'SQL']].map(([x, l], i) => (
+        <g>
+          <path class="dash" d={`M160 92 C160 108,${x} 100,${x} 114`} fill="none" stroke={V} stroke-width="1.4" />
+          <rect x={Number(x) - 34} y="114" width="68" height="26" rx="8" fill="rgba(255,255,255,.03)" stroke={L} />
+          <circle class="pulse" style={`animation-delay:${i * 0.4}s`} cx={Number(x) - 20} cy="127" r="3.5" fill={i === 1 ? A : V} />
+          <text x={Number(x) - 8} y="131" fill={T} font-size="10" font-family="monospace">{l}</text>
+        </g>
+      ))}
+    </svg>
+  )}
   {slug === 'ai-agents' && (
     <div class="absolute inset-0 p-4 flex flex-col justify-center gap-2.5 text-[0.72rem] font-mono">
       <div class="self-end max-w-[78%] rounded-2xl rounded-br-sm px-3 py-2 bg-brand text-white">Why did margin drop in Q3?</div>

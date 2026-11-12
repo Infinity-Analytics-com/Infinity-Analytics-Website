@@ -4,8 +4,8 @@ import Nav from '@/components/Nav.astro';
 import Footer from '@/components/Footer.astro';
 import { getCopy, href, base, htmlLang, langs, defaultLang, type Lang } from '@/i18n';
 import { site } from '@/site';
-interface Props { lang: Lang; path: string; title?: string; description?: string }
-const { lang, path, title, description } = Astro.props;
+interface Props { lang: Lang; path: string; title?: string; description?: string; noindex?: boolean }
+const { lang, path, title, description, noindex } = Astro.props;
 const t = getCopy(lang);
 const pageTitle = title ?? t.meta.title;
 const desc = description ?? t.meta.description;
@@ -25,13 +25,13 @@ const ld = {
 };
 ---
 <!doctype html>
-<html lang={htmlLang[lang]} id="top" data-theme="light">
+<html lang={htmlLang[lang]} id="top" data-theme="light" data-ga={site.gaId || undefined}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={desc} />
-    {isPreview && <meta name="robots" content="noindex" />}
+    {(isPreview || noindex) && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={abs(href(path, lang))} />
     {langs.map((l) => <link rel="alternate" hreflang={htmlLang[l]} href={abs(href(path, l))} />)}
     <link rel="alternate" hreflang="x-default" href={abs(href(path, defaultLang))} />
@@ -60,6 +60,15 @@ const ld = {
     <Nav lang={lang} t={t} path={path} />
     <main id="main"><slot /></main>
     <Footer lang={lang} t={t} />
+    {site.gaId && (
+      <div class="consent card" data-consent hidden role="region" aria-label="Cookies">
+        <p class="text-sm text-muted leading-relaxed">{t.consent.text} <a class="underline hover:text-text" href={href('/privacy', lang)}>{t.privacy.link}</a></p>
+        <div class="mt-4 flex gap-2">
+          <button class="btn btn-primary btn-sm" type="button" data-consent-choice="granted">{t.consent.accept}</button>
+          <button class="btn btn-ghost btn-sm" type="button" data-consent-choice="denied">{t.consent.decline}</button>
+        </div>
+      </div>
+    )}
     <script>import '@/scripts/motion';</script>
   </body>
 </html>

@@ -3,11 +3,12 @@ export const site = {
   name: 'Infinity Analytics',
   url: 'https://infinity-analytics.com',
   email: 'contact@infinity-analytics.com',
-  phone: '+212 661 299 092',
-  phoneHref: 'tel:+212661299092',
-  whatsapp: 'https://wa.me/212661299092',
+  phone: '+212 6 73 72 90 97',
+  phoneHref: 'tel:+212673729097',
+  whatsapp: 'https://wa.me/212673729097',
   address: ['Résidence Abdelmoumen Center', 'Angle Bd Abdelmoumen et Bd Anoual', 'Étage 2, Bureau n°202', '20042 Casablanca, Morocco'],
   formEndpoint: import.meta.env.PUBLIC_FORM_ENDPOINT ?? '',
+  gaId: import.meta.env.PUBLIC_GA_ID ?? '',
 };
 
 export const clients = [

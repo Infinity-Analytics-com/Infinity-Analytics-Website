@@ -2,6 +2,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import { startInfinity } from './infinity';
+import { campaign, initAnalytics, track } from './analytics';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,6 +31,8 @@ if (nav) {
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 }
+
+initAnalytics();
 
 /* ---- theme toggle ---- */
 const root = document.documentElement;
@@ -265,6 +268,8 @@ if (form) {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
     if (data.website) return; // honeypot
+    delete data.website;
+    Object.assign(data, campaign(), { page: location.href });
     const endpoint = form.dataset.endpoint;
     const idle = label.textContent;
     const done = (ok: boolean) => {
@@ -274,10 +279,16 @@ if (form) {
       status.querySelector('[data-error]')!.toggleAttribute('hidden', ok);
       label.textContent = idle;
       btn.disabled = false;
-      if (ok) form.reset();
+      if (ok) {
+        form.reset();
+        track('generate_lead', { interest: data.interest });
+        // the thank-you page is what ad platforms count as a conversion
+        if (form.dataset.thanks) location.href = form.dataset.thanks;
+      }
     };
     if (!endpoint) {
       // No backend configured: hand over to the visitor's mail client.
+      track('contact_email', { page: location.pathname, via: 'form' });
       const body = `${data.message}\n\n${data.name}\n${data.company ?? ''}\n${data.email}`;
       location.href = `mailto:${form.dataset.mailto}?subject=${encodeURIComponent(
         `[${data.interest ?? 'Website'}] ${data.company || data.name}`,

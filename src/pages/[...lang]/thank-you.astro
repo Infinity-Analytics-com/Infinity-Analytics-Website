@@ -1,0 +1,26 @@
+---
+import Base from '@/layouts/Base.astro';
+import Arrow from '@/components/Arrow.astro';
+import { getCopy, href, langPaths, resolveLang } from '@/i18n';
+import { site } from '@/site';
+export const getStaticPaths = langPaths;
+const lang = resolveLang(Astro.params.lang);
+const t = getCopy(lang);
+---
+<Base lang={lang} path="/thank-you" title={t.thanks.metaTitle} noindex>
+  <section class="relative min-h-[88svh] grid place-items-center text-center pt-36 pb-20" data-thanks>
+    <div class="hero-grid"></div>
+    <div class="wrap relative"><div style="max-width:52rem;margin-inline:auto">
+      <span class="grid place-items-center mx-auto w-16 h-16 rounded-full bg-brand text-white shadow-[0_20px_60px_-15px_rgb(94_44_237/.9)]" data-reveal>
+        <svg width="28" height="28" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m4 10.5 4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <p class="eyebrow mt-8 justify-center" data-reveal>{t.thanks.eyebrow}</p>
+      <h1 class="display split mt-6" style="font-size:clamp(2.4rem,6vw,4.75rem)">{t.thanks.title} <span class="em">{t.thanks.titleEm}</span></h1>
+      <p class="lead mt-7 max-w-xl mx-auto" data-reveal>{t.thanks.sub}</p>
+      <div class="mt-10 flex flex-wrap justify-center gap-3" data-reveal>
+        <a class="btn btn-primary" href={href('/', lang)}>{t.thanks.home}<Arrow /></a>
+        <a class="btn btn-ghost" href={site.whatsapp} target="_blank" rel="noopener">{t.cta.secondary}</a>
+      </div>
+    </div></div>
+  </section>
+</Base>

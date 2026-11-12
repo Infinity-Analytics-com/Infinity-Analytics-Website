@@ -1,13 +1,13 @@
 ---
 import Base from '@/layouts/Base.astro';
 import Arrow from '@/components/Arrow.astro';
-import { getCopy, langPaths, resolveLang } from '@/i18n';
+import { getCopy, href, langPaths, resolveLang } from '@/i18n';
 import { site } from '@/site';
 export const getStaticPaths = langPaths;
 const lang = resolveLang(Astro.params.lang);
 const t = getCopy(lang);
 const f = t.contact.form;
-const interests = [...t.services.items.filter((s) => s.kind === 'service').map((s) => s.name), f.interestOther];
+const interests = [...t.services.items.filter((s) => (s.kind === 'service' || s.kind === 'technology' || s.slug === 'training')).map((s) => s.name), f.interestOther];
 ---
 <Base lang={lang} path="/contact" title={t.contact.metaTitle} description={t.contact.sub}>
   <section class="relative pt-40 pb-24 md:pt-48">
@@ -24,7 +24,7 @@ const interests = [...t.services.items.filter((s) => s.kind === 'service').map((
         </dl>
       </div>
 
-      <form id="contact-form" class="card p-6 md:p-9 space-y-6 self-start" data-reveal data-endpoint={site.formEndpoint} data-mailto={site.email} data-sending={f.sending}>
+      <form id="contact-form" class="card p-6 md:p-9 space-y-6 self-start" data-reveal data-endpoint={site.formEndpoint} data-mailto={site.email} data-sending={f.sending} data-thanks={href('/thank-you', lang)}>
         <div class="grid gap-6 sm:grid-cols-2">
           <div class="field"><label for="name">{f.name}</label><input class="input" id="name" name="name" autocomplete="name" required /></div>
           <div class="field"><label for="email">{f.email}</label><input class="input" id="email" name="email" type="email" autocomplete="email" required /></div>

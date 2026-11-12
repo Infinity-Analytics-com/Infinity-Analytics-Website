@@ -39,6 +39,18 @@ Set `PUBLIC_FORM_ENDPOINT` (see `.env.example`) to any URL that accepts a JSON `
 Web3Forms or a Power Automate HTTP trigger. Without it, the form opens the visitor's email client addressed to
 the contact address in `src/site.ts`.
 
+## Analytics and conversion tracking
+
+Set `PUBLIC_GA_ID` to a Google Analytics 4 measurement ID. On GitHub Pages, add it as the repository variable
+`GA_MEASUREMENT_ID` (and the form URL as `FORM_ENDPOINT`) under Settings > Secrets and variables > Actions > Variables.
+
+- Analytics loads only after the visitor accepts the cookie banner. Without an ID there is no script and no banner.
+- Events sent: `generate_lead` (form sent), `contact_whatsapp`, `contact_phone`, `contact_email`.
+- After a successful form submission the visitor lands on `/thank-you/`, which is the page to register as a
+  conversion in Google Ads.
+- Campaign parameters (`utm_*`, `gclid`) are kept for the visit and sent with the form, so each lead shows which ad
+  it came from.
+
 ## Logo
 
 `src/components/Logo.astro` holds an SVG wordmark drawn for this redesign. Replace its contents with the official

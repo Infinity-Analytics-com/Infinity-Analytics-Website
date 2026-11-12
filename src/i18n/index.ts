@@ -27,3 +27,23 @@ export function href(path: string, lang: Lang): string {
 
 /** Static paths for every language, for use in getStaticPaths(). */
 export const langPaths = () => langs.map((l) => ({ params: { lang: l === defaultLang ? undefined : l } }));
+
+type Item = { slug: string; kind: string };
+/** Unlocalised path of a service, solution, technology or training page. */
+export function itemPath(item: Item): string {
+  if (item.slug === 'training') return '/training';
+  if (item.kind === 'training') return `/training/${item.slug.replace(/-training$/, '')}`;
+  if (item.kind === 'technology') return `/technologies/${item.slug}`;
+  return `/services/${item.slug}`;
+}
+export const itemHref = (item: Item, lang: Lang) => href(itemPath(item), lang);
+
+/** Static paths ({ lang, slug }) for the items a route file is responsible for. */
+export function itemPaths(match: (item: Item) => boolean, param: (item: Item) => string = (i) => i.slug) {
+  return langs.flatMap((l) =>
+    en.services.items.filter(match).map((i) => ({
+      params: { lang: l === defaultLang ? undefined : l, slug: param(i) },
+      props: { slug: i.slug },
+    })),
+  );
+}

@@ -309,7 +309,9 @@ a.card:hover {
   z-index: 40;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   gap: 0.25rem;
   padding: 6rem 1.5rem 2rem;
   background: color-mix(in srgb, var(--color-ink) 96%, transparent);
@@ -325,17 +327,125 @@ a.card:hover {
   visibility: visible;
 }
 .mobile-menu a.big {
-  font-size: clamp(2rem, 9vw, 3rem);
+  display: block;
+  font-size: clamp(1.6rem, 7vw, 2.25rem);
   letter-spacing: -0.03em;
   font-weight: 500;
   padding: 0.35rem 0;
 }
 
+.nav-desktop {
+  display: none;
+}
 @media (min-width: 64rem) {
   .nav [data-menu-toggle],
   .mobile-menu {
     display: none;
   }
+  .nav-desktop {
+    display: flex;
+  }
+}
+.nav-item {
+  position: relative;
+}
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.nav-link .chev {
+  opacity: 0.6;
+  transition: transform 0.3s;
+}
+.nav-item:hover .chev,
+.nav-item:focus-within .chev {
+  transform: rotate(180deg);
+}
+.nav-drop {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  padding-top: 0.9rem; /* bridges the gap so the menu stays open while the cursor travels */
+  transform: translate(-50%, 8px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.25s,
+    transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    visibility 0.25s;
+}
+.nav-item:hover .nav-drop,
+.nav-item:focus-within .nav-drop {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+.nav-panel {
+  display: grid;
+  gap: 0.5rem 1.5rem;
+  min-width: 15rem;
+  padding: 0.9rem;
+  border-radius: 1.25rem;
+  border: 1px solid var(--color-line);
+  background: color-mix(in srgb, var(--color-ink-2) 96%, transparent);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 30px 70px -30px rgb(10 6 40 / 0.55);
+}
+.nav-panel.two {
+  grid-template-columns: 1fr 1fr;
+  min-width: 31rem;
+}
+.nav-col-title {
+  padding: 0.4rem 0.75rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.nav-sub {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.75rem;
+  font-size: 0.92rem;
+  white-space: nowrap;
+  color: var(--color-text);
+  transition: background 0.2s;
+}
+.nav-sub svg {
+  opacity: 0;
+  transform: translateX(-6px);
+  transition:
+    opacity 0.2s,
+    transform 0.3s;
+  color: var(--color-violet);
+}
+.nav-sub:hover {
+  background: color-mix(in srgb, var(--color-fg) 7%, transparent);
+}
+.nav-sub:hover svg {
+  opacity: 1;
+  transform: none;
+}
+.mm-group + .mm-group {
+  margin-top: 0.35rem;
+}
+.mm-subs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0.3rem 0 0.8rem;
+}
+.mm-subs a {
+  padding: 0.4rem 0.75rem;
+  border-radius: 99px;
+  border: 1px solid var(--color-line);
+  font-size: 0.82rem;
+  color: var(--color-soft);
 }
 @media (max-width: 26rem) {
   .nav .btn-primary {
@@ -747,6 +857,21 @@ html.js .step:not(.is-active) p {
 .mockviz svg {
   position: static;
   display: block;
+}
+
+/* ---------- cookie consent ---------- */
+.consent {
+  position: fixed;
+  z-index: 55;
+  left: 1rem;
+  bottom: 1rem;
+  width: min(24rem, calc(100vw - 2rem));
+  padding: 1.25rem;
+  background: var(--color-ink-2);
+  box-shadow: 0 30px 70px -25px rgb(10 6 40 / 0.6);
+}
+.consent[hidden] {
+  display: none;
 }
 
 /* ---------- form ---------- */

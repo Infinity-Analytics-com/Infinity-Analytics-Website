@@ -1,0 +1,30 @@
+---
+import Base from '@/layouts/Base.astro';
+import { getCopy, langPaths, resolveLang } from '@/i18n';
+import { privacy } from '@/privacy';
+export const getStaticPaths = langPaths;
+const lang = resolveLang(Astro.params.lang);
+const t = getCopy(lang);
+---
+<Base lang={lang} path="/privacy" title={`${t.privacy.title} | Infinity Analytics`}>
+  <section class="relative pt-40 pb-24 md:pt-48">
+    <div class="hero-grid"></div>
+    <div class="wrap relative" lang="en"><div style="max-width:48rem;margin-inline:auto">
+      <p class="eyebrow">{privacy.updated}</p>
+      <h1 class="display mt-7" style="font-size:clamp(2.4rem,5.5vw,4.5rem)">{t.privacy.title}</h1>
+      {t.privacy.note && <p class="mt-6 chip" lang={lang}>{t.privacy.note}</p>}
+      <div class="mt-10 space-y-5 text-muted leading-relaxed">
+        {privacy.intro.map((p) => <p>{p}</p>)}
+      </div>
+      {privacy.sections.map((s) => (
+        <section class="mt-14">
+          <h2 class="h3 text-text">{s.h}</h2>
+          {s.short && <p class="mt-4 card !rounded-xl px-5 py-4 text-[0.95rem]"><strong class="font-medium">In short:</strong> {s.short}</p>}
+          <div class="mt-5 space-y-4 text-muted leading-relaxed">
+            {s.body.map((p) => p.startsWith('- ') ? <p class="pl-5 border-l border-line">{p.slice(2)}</p> : <p class="break-words">{p}</p>)}
+          </div>
+        </section>
+      ))}
+    </div></div>
+  </section>
+</Base>
