@@ -320,6 +320,8 @@ export const showcaseFor: Record<string, MockId[]> = {
   'power-bi': ['exec', 'sales', 'finance', 'ops'],
   'microsoft-azure': ['portal', 'pipeline', 'mobile'],
   'ai-consultancy': ['agent', 'forecast', 'sales'],
+  'ai-readiness': ['capacity', 'pipeline', 'agent'],
+  'ai-adoption': ['agent', 'approvals', 'exec'],
   training: ['exec', 'finance', 'capacity'],
   'power-bi-training': ['exec', 'sales', 'finance'],
   'fabric-training': ['pipeline', 'capacity', 'exec'],

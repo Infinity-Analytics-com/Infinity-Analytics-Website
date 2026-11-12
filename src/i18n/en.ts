@@ -139,6 +139,40 @@ export const en = {
         stack: ['Azure App Service', 'Azure Functions', 'Azure SQL', 'Data Lake Storage', 'Azure OpenAI', 'Microsoft Entra ID', 'Azure DevOps', 'Bicep'],
       },
       {
+        slug: 'ai-readiness',
+        kind: 'service',
+        name: 'AI Readiness Assessment',
+        tag: 'Assessment',
+        short: 'Is your data ready for AI? A short, fixed-scope assessment of your data estate, governance and skills, with a clear roadmap to your first AI wins.',
+        intro:
+          'Most AI projects stall on the data, not the model. Before you invest in Copilot, agents or machine learning, we assess how ready your data estate really is: quality, accessibility, security, governance and skills. You leave with a scorecard, the gaps that matter and a prioritised plan to close them.',
+        deliverables: [
+          { t: 'Data estate review', d: 'Where your data lives, how good it is and how easily AI tools can reach it.' },
+          { t: 'Governance and security check', d: 'Permissions, sensitivity labels and oversharing risks, reviewed before any Copilot or agent is switched on.' },
+          { t: 'Use-case shortlist', d: 'The AI opportunities worth pursuing first, ranked by value, effort and risk.' },
+          { t: 'Readiness scorecard and roadmap', d: 'A clear score per area and a step-by-step plan your leadership can sign off.' },
+        ],
+        outcomes: ['Know exactly where you stand before you spend', 'Avoid AI pilots that fail on bad data', 'A roadmap leadership can fund with confidence'],
+        stack: ['Microsoft Fabric', 'Microsoft Purview', 'Microsoft 365 Copilot', 'Azure AI Foundry', 'Power BI'],
+      },
+      {
+        slug: 'ai-adoption',
+        kind: 'service',
+        name: 'AI Adoption',
+        tag: 'Adoption',
+        short: 'Turn AI from a pilot into a habit. We help your teams adopt Copilot and AI agents safely, with the training, governance and measurement that make it stick.',
+        intro:
+          'Buying AI licences is the easy part. Getting people to use AI well, every day, is where the value is. We run adoption as a programme: pick the roles and tasks where AI saves real time, roll out Copilot and agents with the right guardrails, train people on their own work, and measure what changes.',
+        deliverables: [
+          { t: 'Adoption plan', d: 'Priority teams, tasks and success measures, agreed with your leadership.' },
+          { t: 'Copilot and agent rollout', d: 'Microsoft 365 Copilot, Copilot Studio agents and Fabric data agents, deployed in controlled waves.' },
+          { t: 'Hands-on enablement', d: 'Role-based workshops, prompt playbooks and internal champions, in English or French.' },
+          { t: 'Governance and measurement', d: 'Usage policies, guardrails and dashboards that show adoption and time saved.' },
+        ],
+        outcomes: ['Teams that use AI daily, not once', 'Measurable time saved on real tasks', 'AI use that stays secure and compliant'],
+        stack: ['Microsoft 365 Copilot', 'Copilot Studio', 'Fabric Data Agents', 'Azure OpenAI', 'Power BI'],
+      },
+      {
         slug: 'ai-consultancy',
         kind: 'service',
         name: 'AI Consultancy',

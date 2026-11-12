@@ -337,7 +337,7 @@ a.card:hover {
 .nav-desktop {
   display: none;
 }
-@media (min-width: 64rem) {
+@media (min-width: 80rem) {
   .nav [data-menu-toggle],
   .mobile-menu {
     display: none;
@@ -959,4 +959,9 @@ html.js .split .w > span {
     opacity: 1;
     transform: none;
   }
+}
+
+.nav-inner > a:first-child {
+  flex-shrink: 0;
+  white-space: nowrap;
 }

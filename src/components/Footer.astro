@@ -1,11 +1,11 @@
 ---
 import Logo from './Logo.astro';
-import { href, itemHref, type Lang } from '@/i18n';
+import { byInterest, href, itemHref, type Lang } from '@/i18n';
 import type { Copy } from '@/i18n/en';
 import { site } from '@/site';
 interface Props { lang: Lang; t: Copy }
 const { lang, t } = Astro.props;
-const of = (kind: string) => t.services.items.filter((s) => s.kind === kind);
+const of = (kind: string) => byInterest(t.services.items.filter((s) => s.kind === kind));
 const cols = [
   { title: t.footer.services, items: of('service') },
   { title: t.footer.products, items: of('product') },

@@ -45,6 +45,33 @@ const V = '#8B5CFF', A = '#FEB85D', L = 'rgba(255,255,255,.14)', T = 'rgba(255,2
       <path class="draw" d="M44 92 L82 70 L120 80 L158 46 L196 58 L234 26 L272 34" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
     </svg>
   )}
+  {slug === 'ai-readiness' && (
+    <svg viewBox="0 0 320 150" preserveAspectRatio="xMidYMid meet">
+      <circle cx="84" cy="75" r="44" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="9" />
+      <circle cx="84" cy="75" r="44" fill="none" stroke={A} stroke-width="9" stroke-linecap="round" stroke-dasharray="199 277" transform="rotate(-90 84 75)" />
+      <text x="84" y="82" text-anchor="middle" fill="#fff" font-size="24" font-family="monospace">72</text>
+      {['Data', 'Governance', 'Skills', 'Use cases'].map((n, i) => (
+        <g>
+          <text x="160" y={32 + i * 30} fill={T} font-size="9" font-family="monospace">{n}</text>
+          <rect x="160" y={38 + i * 30} width="136" height="6" rx="3" fill="rgba(255,255,255,.07)" />
+          <rect class="bar" style={`transform-origin:left;animation-name:growx;animation-delay:${i * 0.4}s`} x="160" y={38 + i * 30} width={[112, 78, 94, 124][i]} height="6" rx="3" fill={i === 1 ? A : V} />
+        </g>
+      ))}
+    </svg>
+  )}
+  {slug === 'ai-adoption' && (
+    <svg viewBox="0 0 320 150" preserveAspectRatio="xMidYMid meet">
+      {[40, 75, 110].map((y) => <line x1="24" x2="296" y1={y} y2={y} stroke={L} stroke-dasharray="2 6" />)}
+      <path d="M28 124 C90 122,110 112,150 80 S230 30,292 26 V132 H28 Z" fill="rgba(139,92,255,.14)" />
+      <path class="draw" d="M28 124 C90 122,110 112,150 80 S230 30,292 26" fill="none" stroke={V} stroke-width="2" stroke-linecap="round" />
+      {[[70, 121, 'Pilot'], [150, 80, 'Rollout'], [262, 30, 'Habit']].map(([x, y, n], i) => (
+        <g>
+          <circle class="pulse" style={`animation-delay:${i * 0.4}s`} cx={x} cy={y} r={i === 2 ? 7 : 5} fill={i === 2 ? A : '#1b1440'} stroke={i === 2 ? A : V} stroke-width="1.5" />
+          <text x={Number(x)} y={Number(y) + (i === 2 ? 22 : -12)} text-anchor="middle" fill={T} font-size="9" font-family="monospace">{n}</text>
+        </g>
+      ))}
+    </svg>
+  )}
   {slug === 'ai-consultancy' && (
     <svg viewBox="0 0 320 150" preserveAspectRatio="xMidYMid meet">
       {[[60, 40], [60, 110], [130, 75], [200, 36], [200, 114], [262, 75]].map(([x, y], i, arr) => arr.slice(i + 1).filter(([x2]) => x2 - x > 0 && x2 - x < 90).map(([x2, y2]) => <line class="dash" x1={x} y1={y} x2={x2} y2={y2} stroke={V} stroke-width="1" opacity=".7" />))}

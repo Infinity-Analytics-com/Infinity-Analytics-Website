@@ -139,6 +139,40 @@ export const fr: Copy = {
         stack: ['Azure App Service', 'Azure Functions', 'Azure SQL', 'Data Lake Storage', 'Azure OpenAI', 'Microsoft Entra ID', 'Azure DevOps', 'Bicep'],
       },
       {
+        slug: 'ai-readiness',
+        kind: 'service',
+        name: 'Diagnostic de maturité IA',
+        tag: 'Diagnostic',
+        short: 'Vos données sont-elles prêtes pour l’IA ? Un diagnostic court, au périmètre fixe, de votre patrimoine de données, de votre gouvernance et de vos compétences, avec une feuille de route claire vers vos premiers succès.',
+        intro:
+          'La plupart des projets IA échouent à cause des données, pas du modèle. Avant d’investir dans Copilot, des agents ou du machine learning, nous évaluons la maturité réelle de votre patrimoine de données : qualité, accessibilité, sécurité, gouvernance et compétences. Vous repartez avec un score, les écarts qui comptent et un plan priorisé pour les combler.',
+        deliverables: [
+          { t: 'Revue du patrimoine de données', d: 'Où se trouvent vos données, quelle est leur qualité et avec quelle facilité les outils d’IA peuvent y accéder.' },
+          { t: 'Contrôle gouvernance et sécurité', d: 'Droits d’accès, étiquettes de confidentialité et risques de surpartage, passés en revue avant d’activer Copilot ou un agent.' },
+          { t: 'Sélection de cas d’usage', d: 'Les opportunités IA à traiter en premier, classées par valeur, effort et risque.' },
+          { t: 'Score de maturité et feuille de route', d: 'Un score clair par domaine et un plan par étapes que votre direction peut valider.' },
+        ],
+        outcomes: ['Savoir où vous en êtes avant d’investir', 'Éviter les pilotes IA qui échouent sur de mauvaises données', 'Une feuille de route que la direction peut financer en confiance'],
+        stack: ['Microsoft Fabric', 'Microsoft Purview', 'Microsoft 365 Copilot', 'Azure AI Foundry', 'Power BI'],
+      },
+      {
+        slug: 'ai-adoption',
+        kind: 'service',
+        name: 'Adoption de l’IA',
+        tag: 'Adoption',
+        short: 'Faites de l’IA une habitude, pas un pilote. Nous aidons vos équipes à adopter Copilot et les agents IA en toute sécurité, avec la formation, la gouvernance et la mesure qui ancrent l’usage.',
+        intro:
+          'Acheter des licences IA est la partie facile. Amener les équipes à bien utiliser l’IA, chaque jour, c’est là que se crée la valeur. Nous menons l’adoption comme un programme : choisir les métiers et les tâches où l’IA fait vraiment gagner du temps, déployer Copilot et les agents avec les bons garde-fous, former chacun sur son propre travail et mesurer ce qui change.',
+        deliverables: [
+          { t: 'Plan d’adoption', d: 'Équipes prioritaires, tâches ciblées et indicateurs de succès, validés avec votre direction.' },
+          { t: 'Déploiement de Copilot et des agents', d: 'Microsoft 365 Copilot, agents Copilot Studio et agents de données Fabric, déployés par vagues maîtrisées.' },
+          { t: 'Accompagnement pratique', d: 'Ateliers par métier, guides de prompts et ambassadeurs internes, en français ou en anglais.' },
+          { t: 'Gouvernance et mesure', d: 'Règles d’usage, garde-fous et tableaux de bord qui montrent l’adoption et le temps gagné.' },
+        ],
+        outcomes: ['Des équipes qui utilisent l’IA au quotidien', 'Un temps gagné mesurable sur des tâches réelles', 'Un usage de l’IA qui reste sécurisé et conforme'],
+        stack: ['Microsoft 365 Copilot', 'Copilot Studio', 'Fabric Data Agents', 'Azure OpenAI', 'Power BI'],
+      },
+      {
         slug: 'ai-consultancy',
         kind: 'service',
         name: 'Conseil en IA',
