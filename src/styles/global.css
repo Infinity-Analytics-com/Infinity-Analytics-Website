@@ -11,13 +11,42 @@
   --color-ink: #07051a;
   --color-ink-2: #0d0a26;
   --color-ink-3: #151033;
-  --color-line: rgb(255 255 255 / 0.09);
+  --color-line: color-mix(in srgb, var(--color-fg) 9%, transparent);
   --color-text: #f3f1ff;
   --color-muted: #a9a4c7;
   --color-violet: #8b5cff;
   --color-brand: #5e2ced;
   --color-amber: #feb85d;
+  --color-fg: #ffffff;
+  --color-soft: #cfc7ff;
   --breakpoint-xs: 26rem;
+}
+
+/* Theme-dependent values. Dark is the default; light overrides below. */
+:root {
+  color-scheme: dark;
+  --glow: 0.28;
+  --em-1: #c4adff;
+  --em-2: #a07bff;
+  --em-3: #feb85d;
+  --card-shadow: none;
+}
+:root[data-theme='light'] {
+  color-scheme: light;
+  --color-ink: #f6f4ff;
+  --color-ink-2: #ffffff;
+  --color-ink-3: #ffffff;
+  --color-text: #130c36;
+  --color-muted: #5a5578;
+  --color-soft: #4a34b8;
+  --color-fg: #1b1150;
+  --color-violet: #7447ff;
+  --color-amber: #b9650a;
+  --glow: 0.14;
+  --em-1: #5e2ced;
+  --em-2: #8250ff;
+  --em-3: #d97a14;
+  --card-shadow: 0 1px 2px rgb(27 17 80 / 0.05), 0 18px 50px -24px rgb(27 17 80 / 0.28);
 }
 
 @view-transition {
@@ -44,8 +73,8 @@ body {
   min-height: 100dvh;
   overflow-x: clip;
   background:
-    radial-gradient(60rem 40rem at 85% -10%, rgb(94 44 237 / 0.28), transparent 60%),
-    radial-gradient(50rem 36rem at -10% 30%, rgb(94 44 237 / 0.12), transparent 60%), var(--color-ink);
+    radial-gradient(60rem 40rem at 85% -10%, rgb(94 44 237 / var(--glow)), transparent 60%),
+    radial-gradient(50rem 36rem at -10% 30%, rgb(94 44 237 / calc(var(--glow) * 0.45)), transparent 60%), var(--color-ink);
 }
 ::selection {
   background: var(--color-violet);
@@ -95,7 +124,7 @@ body {
   font-style: italic;
   font-weight: 400;
   letter-spacing: -0.01em;
-  background: linear-gradient(100deg, #c4adff 0%, #a07bff 35%, var(--color-amber) 100%);
+  background: linear-gradient(100deg, var(--em-1) 0%, var(--em-2) 35%, var(--em-3) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -115,7 +144,7 @@ body {
   font-size: 0.72rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #c9bfff;
+  color: var(--color-soft);
 }
 .eyebrow::before {
   content: '';
@@ -156,23 +185,23 @@ body {
   color: #fff;
   background: linear-gradient(120deg, #7c4dff, var(--color-brand) 60%, #4a1fd1);
   box-shadow:
-    0 0 0 1px rgb(255 255 255 / 0.14) inset,
+    0 0 0 1px rgba(255,255,255,0.14) inset,
     0 12px 40px -12px rgb(124 77 255 / 0.9);
 }
 .btn-primary:hover {
   box-shadow:
-    0 0 0 1px rgb(255 255 255 / 0.24) inset,
+    0 0 0 1px rgba(255,255,255,0.24) inset,
     0 18px 50px -10px rgb(124 77 255 / 1);
 }
 .btn-ghost {
   color: var(--color-text);
   border: 1px solid var(--color-line);
-  background: rgb(255 255 255 / 0.03);
+  background: color-mix(in srgb, var(--color-fg) 3%, transparent);
   backdrop-filter: blur(8px);
 }
 .btn-ghost:hover {
-  border-color: rgb(255 255 255 / 0.28);
-  background: rgb(255 255 255 / 0.07);
+  border-color: color-mix(in srgb, var(--color-fg) 28%, transparent);
+  background: color-mix(in srgb, var(--color-fg) 7%, transparent);
 }
 .btn-sm {
   padding: 0.7rem 1.1rem;
@@ -184,9 +213,16 @@ body {
   position: relative;
   border-radius: 1.5rem;
   border: 1px solid var(--color-line);
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.055), rgb(255 255 255 / 0.015));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--color-fg) 5.5%, transparent), color-mix(in srgb, var(--color-fg) 1.5%, transparent));
   overflow: hidden;
   isolation: isolate;
+  box-shadow: var(--card-shadow);
+}
+:root[data-theme='light'] .card {
+  background: #fff;
+}
+:root[data-theme='light'] .card::before {
+  background: radial-gradient(28rem circle at var(--mx, 50%) var(--my, 50%), rgb(139 92 255 / 0.13), transparent 55%);
 }
 .card::before {
   /* cursor spotlight */
@@ -216,10 +252,10 @@ a.card:hover {
   padding: 0.38rem 0.75rem;
   border-radius: 99px;
   border: 1px solid var(--color-line);
-  background: rgb(255 255 255 / 0.04);
+  background: color-mix(in srgb, var(--color-fg) 4%, transparent);
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  color: #d6cfff;
+  color: var(--color-soft);
 }
 
 /* ---------- nav ---------- */
@@ -246,7 +282,7 @@ a.card:hover {
     backdrop-filter 0.4s;
 }
 .nav.is-scrolled .nav-inner {
-  background: rgb(13 10 38 / 0.72);
+  background: color-mix(in srgb, var(--color-ink-2) 72%, transparent);
   border-color: var(--color-line);
   backdrop-filter: blur(18px) saturate(160%);
 }
@@ -257,15 +293,15 @@ a.card:hover {
   position: relative;
   padding: 0.5rem 0.85rem;
   font-size: 0.92rem;
-  color: #d9d4f5;
+  color: var(--color-soft);
   border-radius: 99px;
   transition:
     color 0.25s,
     background 0.25s;
 }
 .nav-link:hover {
-  color: #fff;
-  background: rgb(255 255 255 / 0.07);
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--color-fg) 7%, transparent);
 }
 .mobile-menu {
   position: fixed;
@@ -276,7 +312,7 @@ a.card:hover {
   justify-content: center;
   gap: 0.25rem;
   padding: 6rem 1.5rem 2rem;
-  background: rgb(7 5 26 / 0.96);
+  background: color-mix(in srgb, var(--color-ink) 96%, transparent);
   backdrop-filter: blur(20px);
   opacity: 0;
   visibility: hidden;
@@ -330,8 +366,8 @@ a.card:hover {
   inset: 0;
   z-index: 0;
   background-image:
-    linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+    linear-gradient(color-mix(in srgb, var(--color-fg) 3.5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--color-fg) 3.5%, transparent) 1px, transparent 1px);
   background-size: 4.5rem 4.5rem;
   mask-image: radial-gradient(ellipse 80% 70% at 60% 40%, #000 20%, transparent 75%);
 }
@@ -342,13 +378,41 @@ a.card:hover {
   background: linear-gradient(transparent, var(--color-ink));
   z-index: 1;
 }
+:root[data-theme='light'] .float-chip {
+  box-shadow: 0 20px 50px -22px rgb(27 17 80 / 0.4);
+}
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 99px;
+  border: 1px solid var(--color-line);
+  color: var(--color-text);
+  cursor: pointer;
+  transition:
+    background 0.25s,
+    border-color 0.25s,
+    transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.theme-toggle:hover {
+  background: color-mix(in srgb, var(--color-fg) 8%, transparent);
+  transform: rotate(18deg);
+}
+.theme-toggle .sun,
+:root[data-theme='light'] .theme-toggle .moon {
+  display: none;
+}
+:root[data-theme='light'] .theme-toggle .sun {
+  display: block;
+}
 .float-chip {
   position: absolute;
   z-index: 2;
   padding: 0.8rem 1rem;
   border-radius: 1rem;
-  border: 1px solid rgb(255 255 255 / 0.12);
-  background: rgb(21 16 51 / 0.6);
+  border: 1px solid color-mix(in srgb, var(--color-fg) 12%, transparent);
+  background: color-mix(in srgb, var(--color-ink-3) 60%, transparent);
   backdrop-filter: blur(14px);
   box-shadow: 0 20px 60px -20px rgb(0 0 0 / 0.8);
   animation: bob 7s ease-in-out infinite;
@@ -389,22 +453,27 @@ a.card:hover {
   font-size: clamp(1.15rem, 2vw, 1.6rem);
   font-weight: 600;
   letter-spacing: -0.03em;
-  color: rgb(243 241 255 / 0.42);
+  color: color-mix(in srgb, var(--color-text) 42%, transparent);
   white-space: nowrap;
   transition: color 0.3s;
 }
 .client:hover {
-  color: #fff;
+  color: var(--color-text);
 }
 
 /* ---------- service visuals ---------- */
 .viz {
+  --color-fg: #ffffff;
+  --color-soft: #d6cfff;
+  --color-amber: #feb85d;
+  --color-line: rgb(255 255 255 / 0.1);
+  color: #f3f1ff;
   position: relative;
   height: 9.5rem;
   border-radius: 1rem;
   border: 1px solid var(--color-line);
   background:
-    radial-gradient(18rem 10rem at 80% 0%, rgb(139 92 255 / 0.22), transparent 70%), rgb(7 5 26 / 0.55);
+    radial-gradient(18rem 10rem at 80% 0%, rgb(139 92 255 / 0.22), transparent 70%), #0b0822;
   overflow: hidden;
 }
 .viz svg {
@@ -486,6 +555,7 @@ a.card:hover {
 
 /* ---------- stats band ---------- */
 .band {
+  color: #fff;
   position: relative;
   border-radius: 2rem;
   padding: clamp(2.5rem, 6vw, 5rem);
@@ -499,7 +569,7 @@ a.card:hover {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgb(255 255 255 / 0.16) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255,255,255,0.16) 1px, transparent 1px);
   background-size: 1.4rem 1.4rem;
   mask-image: linear-gradient(120deg, transparent 30%, #000);
   pointer-events: none;
@@ -587,14 +657,14 @@ html.js .step:not(.is-active) p {
   display: block;
   margin-bottom: 0.5rem;
   font-size: 0.85rem;
-  color: #cfc9ee;
+  color: var(--color-soft);
 }
 .input {
   width: 100%;
   padding: 0.9rem 1rem;
   border-radius: 0.9rem;
   border: 1px solid var(--color-line);
-  background: rgb(255 255 255 / 0.04);
+  background: color-mix(in srgb, var(--color-fg) 4%, transparent);
   color: var(--color-text);
   font: inherit;
   transition:
@@ -603,12 +673,12 @@ html.js .step:not(.is-active) p {
     box-shadow 0.25s;
 }
 .input::placeholder {
-  color: rgb(169 164 199 / 0.6);
+  color: color-mix(in srgb, var(--color-muted) 60%, transparent);
 }
 .input:focus {
   outline: none;
   border-color: var(--color-violet);
-  background: rgb(255 255 255 / 0.07);
+  background: color-mix(in srgb, var(--color-fg) 7%, transparent);
   box-shadow: 0 0 0 4px rgb(139 92 255 / 0.2);
 }
 .pill-check input {
@@ -622,7 +692,7 @@ html.js .step:not(.is-active) p {
   border-radius: 99px;
   border: 1px solid var(--color-line);
   font-size: 0.86rem;
-  color: #d6cfff;
+  color: var(--color-soft);
   cursor: pointer;
   transition: all 0.25s;
 }

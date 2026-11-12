@@ -41,7 +41,11 @@ export function startInfinity(canvas: HTMLCanvasElement, reduced: boolean) {
 
   function frame(time: number) {
     ctx!.clearRect(0, 0, w, h);
-    ctx!.globalCompositeOperation = 'lighter';
+    const light = document.documentElement.dataset.theme === 'light';
+    // additive glow on dark; solid, deeper colours on light
+    ctx!.globalCompositeOperation = light ? 'source-over' : 'lighter';
+    const c0 = light ? [94, 44, 237] : [124, 92, 255];
+    const c1 = light ? [224, 122, 16] : [254, 184, 93];
     mouse.x += (mouse.tx - mouse.x) * 0.05;
     mouse.y += (mouse.ty - mouse.y) * 0.05;
     const tilt = mouse.x * 0.18;
@@ -79,10 +83,10 @@ export function startInfinity(canvas: HTMLCanvasElement, reduced: boolean) {
       }
       // colour: violet on the left lobe, warm amber on the right
       const mix = (c + 1) / 2;
-      const r = Math.round(124 + (254 - 124) * mix * mix);
-      const g = Math.round(92 + (184 - 92) * mix * mix);
-      const b = Math.round(255 + (93 - 255) * mix * mix);
-      const alpha = (p.hot ? 0.95 : 0.5) * (0.55 + 0.45 * Math.abs(Math.sin(p.t * 2 + p.depth)));
+      const r = Math.round(c0[0] + (c1[0] - c0[0]) * mix * mix);
+      const g = Math.round(c0[1] + (c1[1] - c0[1]) * mix * mix);
+      const b = Math.round(c0[2] + (c1[2] - c0[2]) * mix * mix);
+      const alpha = (p.hot ? 0.95 : light ? 0.62 : 0.5) * (0.55 + 0.45 * Math.abs(Math.sin(p.t * 2 + p.depth)));
       const size = p.size * (p.hot ? 1.9 : 1) * persp;
       ctx!.fillStyle = `rgba(${r},${g},${b},${alpha})`;
       ctx!.beginPath();

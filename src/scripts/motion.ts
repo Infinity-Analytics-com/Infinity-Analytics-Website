@@ -31,6 +31,27 @@ if (nav) {
   onScroll();
 }
 
+/* ---- theme toggle ---- */
+const root = document.documentElement;
+const themeMeta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+const applyTheme = (t: string) => {
+  root.dataset.theme = t;
+  themeMeta?.setAttribute('content', t === 'light' ? '#f6f4ff' : '#07051a');
+  $$('[data-theme-toggle]').forEach((b) => b.setAttribute('aria-pressed', String(t === 'light')));
+};
+applyTheme(root.dataset.theme === 'light' ? 'light' : 'dark');
+$$('[data-theme-toggle]').forEach((b) =>
+  b.addEventListener('click', () => {
+    const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+    applyTheme(next);
+    try {
+      localStorage.setItem('theme', next);
+    } catch {
+      /* storage unavailable: the choice lasts for this page only */
+    }
+  }),
+);
+
 /* ---- mobile menu ---- */
 const menu = document.querySelector<HTMLElement>('.mobile-menu');
 const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');

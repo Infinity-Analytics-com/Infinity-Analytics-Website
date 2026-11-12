@@ -17,27 +17,27 @@ const prod = t.services.items.filter((s) => s.kind === 'product');
     <div>
       <h2 class="eyebrow mb-5">{t.footer.services}</h2>
       <ul class="space-y-2.5 text-sm text-muted">
-        {svc.map((s) => <li><a class="hover:text-white transition-colors" href={href(`/services/${s.slug}`, lang)}>{s.name}</a></li>)}
+        {svc.map((s) => <li><a class="hover:text-text transition-colors" href={href(`/services/${s.slug}`, lang)}>{s.name}</a></li>)}
       </ul>
     </div>
     <div>
       <h2 class="eyebrow mb-5">{t.footer.products}</h2>
       <ul class="space-y-2.5 text-sm text-muted">
-        {prod.map((s) => <li><a class="hover:text-white transition-colors" href={href(`/services/${s.slug}`, lang)}>{s.name}</a></li>)}
-        <li><a class="hover:text-white transition-colors" href={href('/contact', lang)}>{t.nav.contact}</a></li>
+        {prod.map((s) => <li><a class="hover:text-text transition-colors" href={href(`/services/${s.slug}`, lang)}>{s.name}</a></li>)}
+        <li><a class="hover:text-text transition-colors" href={href('/contact', lang)}>{t.nav.contact}</a></li>
       </ul>
     </div>
     <div>
       <h2 class="eyebrow mb-5">{t.nav.contact}</h2>
       <ul class="space-y-2.5 text-sm text-muted">
-        <li><a class="hover:text-white transition-colors" href={`mailto:${site.email}`}>{site.email}</a></li>
-        <li><a class="hover:text-white transition-colors" href={site.phoneHref}>{site.phone}</a></li>
+        <li><a class="hover:text-text transition-colors" href={`mailto:${site.email}`}>{site.email}</a></li>
+        <li><a class="hover:text-text transition-colors" href={site.phoneHref}>{site.phone}</a></li>
         <li class="leading-relaxed pt-1">{site.address.map((l) => <span class="block">{l}</span>)}</li>
       </ul>
     </div>
   </div>
   <div class="wrap pb-10 flex flex-wrap items-center justify-between gap-4 text-xs text-muted font-mono">
     <span>© {new Date().getFullYear()} {site.name}. {t.footer.rights}</span>
-    <a class="hover:text-white transition-colors" href="#top">{t.footer.top} ↑</a>
+    <a class="hover:text-text transition-colors" href="#top">{t.footer.top} ↑</a>
   </div>
 </footer>

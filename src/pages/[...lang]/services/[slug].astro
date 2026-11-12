@@ -19,7 +19,7 @@ const next = items[(idx + 1) % items.length];
     <div class="hero-grid"></div>
     <div class="wrap relative grid gap-12 lg:grid-cols-[1.25fr_1fr] lg:items-end">
       <div>
-        <a class="eyebrow hover:text-white transition-colors" href={href('/', lang) + (s.kind === 'product' ? '#products' : '#services')} data-reveal>← {s.kind === 'product' ? t.nav.products : t.services.all}</a>
+        <a class="eyebrow hover:text-text transition-colors" href={href('/', lang) + (s.kind === 'product' ? '#products' : '#services')} data-reveal>← {s.kind === 'product' ? t.nav.products : t.services.all}</a>
         <h1 class="display split mt-7">{s.name}</h1>
         <p class="lead mt-8 max-w-2xl" data-reveal>{s.intro}</p>
         <div class="mt-10 flex flex-wrap gap-3" data-reveal>

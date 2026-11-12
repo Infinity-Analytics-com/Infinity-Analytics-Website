@@ -14,6 +14,7 @@ export const en = {
     clients: 'Clients',
     contact: 'Contact',
     cta: 'Book a call',
+    theme: 'Switch between dark and light mode',
     menu: 'Menu',
     close: 'Close',
     skip: 'Skip to content',

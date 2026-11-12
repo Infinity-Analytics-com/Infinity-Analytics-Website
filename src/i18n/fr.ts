@@ -14,6 +14,7 @@ export const fr: Copy = {
     clients: 'Clients',
     contact: 'Contact',
     cta: 'Prendre rendez-vous',
+    theme: 'Basculer entre mode sombre et mode clair',
     menu: 'Menu',
     close: 'Fermer',
     skip: 'Aller au contenu',

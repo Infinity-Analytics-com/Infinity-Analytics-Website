@@ -66,7 +66,7 @@ const rows = [testimonials.slice(0, half), testimonials.slice(half)];
               <span class="chip">{s.tag}</span>
             </div>
             <p class="mt-3 text-muted leading-relaxed text-[0.97rem]">{s.short}</p>
-            <span class="mt-auto pt-6 inline-flex items-center gap-2 text-sm text-[#c9bfff] group-hover:text-white transition-colors">{t.services.more}<span class="transition-transform group-hover:translate-x-1"><Arrow /></span></span>
+            <span class="mt-auto pt-6 inline-flex items-center gap-2 text-sm text-soft group-hover:text-text transition-colors">{t.services.more}<span class="transition-transform group-hover:translate-x-1"><Arrow /></span></span>
           </a>
         ))}
       </div>
@@ -147,7 +147,7 @@ const rows = [testimonials.slice(0, half), testimonials.slice(half)];
               <span class="chip">{s.tag}</span>
               <h3 class="h3 mt-5 !text-[1.75rem]">{s.name}</h3>
               <p class="mt-3 text-muted leading-relaxed text-[0.97rem]">{s.short}</p>
-              <span class="mt-6 inline-flex items-center gap-2 text-sm text-[#c9bfff] group-hover:text-white transition-colors">{t.services.more}<span class="transition-transform group-hover:translate-x-1"><Arrow /></span></span>
+              <span class="mt-6 inline-flex items-center gap-2 text-sm text-soft group-hover:text-text transition-colors">{t.services.more}<span class="transition-transform group-hover:translate-x-1"><Arrow /></span></span>
             </div>
             <ServiceViz slug={s.slug} />
           </a>
@@ -194,9 +194,9 @@ const rows = [testimonials.slice(0, half), testimonials.slice(half)];
             <div class="marquee-track !items-stretch" aria-hidden={i === 1 ? 'true' : undefined}>
               {[...row, ...row].map((q) => (
                 <figure class="card quote flex flex-col">
-                  <blockquote class="text-[1.02rem] leading-relaxed text-[#e6e2fb]">“{q.quote}”</blockquote>
+                  <blockquote class="text-[1.02rem] leading-relaxed text-text/90">“{q.quote}”</blockquote>
                   <figcaption class="mt-auto pt-6 flex items-center gap-3">
-                    <span class="grid place-items-center w-10 h-10 rounded-full bg-brand/60 border border-violet/60 font-medium text-sm">{q.name.split(' ').map((n) => n[0]).slice(0, 2).join('')}</span>
+                    <span class="grid place-items-center w-10 h-10 rounded-full bg-brand/70 border border-violet/60 text-white font-medium text-sm">{q.name.split(' ').map((n) => n[0]).slice(0, 2).join('')}</span>
                     <span class="text-sm"><span class="block font-medium">{q.name}</span><span class="block text-muted">{q.org} · {q.country}</span></span>
                   </figcaption>
                 </figure>
