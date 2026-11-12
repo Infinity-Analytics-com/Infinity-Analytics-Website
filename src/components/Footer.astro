@@ -1,0 +1,43 @@
+---
+import Logo from './Logo.astro';
+import { href, type Lang } from '@/i18n';
+import type { Copy } from '@/i18n/en';
+import { site } from '@/site';
+interface Props { lang: Lang; t: Copy }
+const { lang, t } = Astro.props;
+const svc = t.services.items.filter((s) => s.kind === 'service');
+const prod = t.services.items.filter((s) => s.kind === 'product');
+---
+<footer class="border-t border-line mt-10">
+  <div class="wrap py-16 grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+    <div>
+      <Logo />
+      <p class="mt-5 text-sm text-muted max-w-xs leading-relaxed">{t.footer.blurb}</p>
+    </div>
+    <div>
+      <h2 class="eyebrow mb-5">{t.footer.services}</h2>
+      <ul class="space-y-2.5 text-sm text-muted">
+        {svc.map((s) => <li><a class="hover:text-white transition-colors" href={href(`/services/${s.slug}`, lang)}>{s.name}</a></li>)}
+      </ul>
+    </div>
+    <div>
+      <h2 class="eyebrow mb-5">{t.footer.products}</h2>
+      <ul class="space-y-2.5 text-sm text-muted">
+        {prod.map((s) => <li><a class="hover:text-white transition-colors" href={href(`/services/${s.slug}`, lang)}>{s.name}</a></li>)}
+        <li><a class="hover:text-white transition-colors" href={href('/contact', lang)}>{t.nav.contact}</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="eyebrow mb-5">{t.nav.contact}</h2>
+      <ul class="space-y-2.5 text-sm text-muted">
+        <li><a class="hover:text-white transition-colors" href={`mailto:${site.email}`}>{site.email}</a></li>
+        <li><a class="hover:text-white transition-colors" href={site.phoneHref}>{site.phone}</a></li>
+        <li class="leading-relaxed pt-1">{site.address.map((l) => <span class="block">{l}</span>)}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap pb-10 flex flex-wrap items-center justify-between gap-4 text-xs text-muted font-mono">
+    <span>© {new Date().getFullYear()} {site.name}. {t.footer.rights}</span>
+    <a class="hover:text-white transition-colors" href="#top">{t.footer.top} ↑</a>
+  </div>
+</footer>

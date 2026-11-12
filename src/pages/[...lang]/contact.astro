@@ -1,0 +1,53 @@
+---
+import Base from '@/layouts/Base.astro';
+import Arrow from '@/components/Arrow.astro';
+import { getCopy, langPaths, resolveLang } from '@/i18n';
+import { site } from '@/site';
+export const getStaticPaths = langPaths;
+const lang = resolveLang(Astro.params.lang);
+const t = getCopy(lang);
+const f = t.contact.form;
+const interests = [...t.services.items.filter((s) => s.kind === 'service').map((s) => s.name), f.interestOther];
+---
+<Base lang={lang} path="/contact" title={t.contact.metaTitle} description={t.contact.sub}>
+  <section class="relative pt-40 pb-24 md:pt-48">
+    <div class="hero-grid"></div>
+    <div class="wrap relative grid gap-14 lg:grid-cols-[1fr_1.15fr] lg:gap-20">
+      <div>
+        <p class="eyebrow" data-reveal>{t.contact.eyebrow}</p>
+        <h1 class="display split mt-7" style="font-size:clamp(2.6rem,6vw,5rem)">{t.contact.title} <span class="em">{t.contact.titleEm}</span></h1>
+        <p class="lead mt-8 max-w-md" data-reveal>{t.contact.sub}</p>
+        <dl class="mt-12 space-y-7" data-reveal>
+          <div><dt class="font-mono text-xs uppercase tracking-widest text-muted">{t.contact.details.email}</dt><dd class="mt-2 text-xl tracking-tight"><a class="hover:text-amber transition-colors" href={`mailto:${site.email}`}>{site.email}</a></dd></div>
+          <div><dt class="font-mono text-xs uppercase tracking-widest text-muted">{t.contact.details.phone}</dt><dd class="mt-2 text-xl tracking-tight flex flex-wrap items-center gap-3"><a class="hover:text-amber transition-colors" href={site.phoneHref}>{site.phone}</a><a class="chip hover:!text-white" href={site.whatsapp} target="_blank" rel="noopener">WhatsApp ↗</a></dd></div>
+          <div><dt class="font-mono text-xs uppercase tracking-widest text-muted">{t.contact.details.office}</dt><dd class="mt-2 text-muted leading-relaxed">{site.address.map((l) => <span class="block">{l}</span>)}</dd></div>
+        </dl>
+      </div>
+
+      <form id="contact-form" class="card p-6 md:p-9 space-y-6 self-start" data-reveal data-endpoint={site.formEndpoint} data-mailto={site.email} data-sending={f.sending}>
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div class="field"><label for="name">{f.name}</label><input class="input" id="name" name="name" autocomplete="name" required /></div>
+          <div class="field"><label for="email">{f.email}</label><input class="input" id="email" name="email" type="email" autocomplete="email" required /></div>
+        </div>
+        <div class="field"><label for="company">{f.company}</label><input class="input" id="company" name="company" autocomplete="organization" /></div>
+        <fieldset class="field">
+          <legend class="block mb-3 text-[0.85rem] text-[#cfc9ee]">{f.interest}</legend>
+          <div class="flex flex-wrap gap-2">
+            {interests.map((n, i) => <label class="pill-check !mb-0"><input type="radio" name="interest" value={n} checked={i === 0} /><span>{n}</span></label>)}
+          </div>
+        </fieldset>
+        <div class="field"><label for="message">{f.message}</label><textarea class="input min-h-36 resize-y" id="message" name="message" placeholder={f.messagePh} required></textarea></div>
+        <input class="hidden" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <p class="text-xs text-muted max-w-xs">{f.consent}</p>
+          <button class="btn btn-primary" type="submit"><span>{f.submit}</span><Arrow /></button>
+        </div>
+        <div data-status hidden role="status" class="rounded-xl border border-line bg-white/5 px-4 py-3 text-sm">
+          <span data-ok>{f.success}</span>
+          <span data-error hidden>{f.error} <a class="underline" href={`mailto:${site.email}`}>{site.email}</a>.</span>
+        </div>
+        <p class="text-xs text-muted">{t.contact.details.hours}</p>
+      </form>
+    </div>
+  </section>
+</Base>

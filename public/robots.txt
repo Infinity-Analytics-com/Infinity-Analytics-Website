@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://infinity-analytics.com/sitemap-index.xml

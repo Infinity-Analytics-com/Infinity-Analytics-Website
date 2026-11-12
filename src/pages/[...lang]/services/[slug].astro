@@ -1,0 +1,73 @@
+---
+import Base from '@/layouts/Base.astro';
+import Arrow from '@/components/Arrow.astro';
+import CTA from '@/components/CTA.astro';
+import ServiceViz from '@/components/ServiceViz.astro';
+import { getCopy, href, langs, defaultLang, resolveLang } from '@/i18n';
+import { en } from '@/i18n/en';
+export const getStaticPaths = () =>
+  langs.flatMap((l) => en.services.items.map((s) => ({ params: { lang: l === defaultLang ? undefined : l, slug: s.slug } })));
+const lang = resolveLang(Astro.params.lang);
+const t = getCopy(lang);
+const items = t.services.items;
+const idx = items.findIndex((s) => s.slug === Astro.params.slug);
+const s = items[idx];
+const next = items[(idx + 1) % items.length];
+---
+<Base lang={lang} path={`/services/${s.slug}`} title={`${s.name} | Infinity Analytics`} description={s.short}>
+  <section class="relative pt-40 pb-16 md:pt-48">
+    <div class="hero-grid"></div>
+    <div class="wrap relative grid gap-12 lg:grid-cols-[1.25fr_1fr] lg:items-end">
+      <div>
+        <a class="eyebrow hover:text-white transition-colors" href={href('/', lang) + (s.kind === 'product' ? '#products' : '#services')} data-reveal>← {s.kind === 'product' ? t.nav.products : t.services.all}</a>
+        <h1 class="display split mt-7">{s.name}</h1>
+        <p class="lead mt-8 max-w-2xl" data-reveal>{s.intro}</p>
+        <div class="mt-10 flex flex-wrap gap-3" data-reveal>
+          <a class="btn btn-primary" data-magnetic href={href('/contact', lang)}>{t.hero.primary}<Arrow /></a>
+        </div>
+      </div>
+      <div class="card p-4" data-reveal><div class="[&_.viz]:h-56 md:[&_.viz]:h-64"><ServiceViz slug={s.slug} /></div></div>
+    </div>
+  </section>
+
+  <section class="section !pt-10">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>{t.services.deliverables}</p>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        {s.deliverables.map((d, i) => (
+          <div class="card p-7" data-reveal>
+            <span class="font-mono text-xs text-amber">0{i + 1}</span>
+            <h2 class="h3 mt-6">{d.t}</h2>
+            <p class="mt-3 text-muted leading-relaxed">{d.d}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-20 grid gap-12 lg:grid-cols-2">
+        <div>
+          <p class="eyebrow" data-reveal>{t.services.outcomes}</p>
+          <ul class="mt-8">
+            {s.outcomes.map((o) => (
+              <li class="flex items-start gap-4 py-5 border-t border-line text-xl md:text-2xl tracking-tight" data-reveal>
+                <svg class="mt-1.5 shrink-0 text-amber" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m4 10.5 4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                {o}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p class="eyebrow" data-reveal>{t.services.stack}</p>
+          <div class="mt-8 flex flex-wrap gap-2.5" data-reveal>
+            {s.stack.map((x) => <span class="chip !text-sm !px-4 !py-2.5">{x}</span>)}
+          </div>
+          <a class="card mt-10 p-7 flex items-center justify-between gap-6 group" href={href(`/services/${next.slug}`, lang)} data-reveal>
+            <span><span class="font-mono text-xs text-muted uppercase tracking-widest">{t.services.next}</span><span class="block h3 mt-2">{next.name}</span></span>
+            <span class="grid place-items-center w-12 h-12 rounded-full border border-line transition-all group-hover:bg-brand group-hover:border-violet"><Arrow /></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTA lang={lang} t={t} />
+</Base>

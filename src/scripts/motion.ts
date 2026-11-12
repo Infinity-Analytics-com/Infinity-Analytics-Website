@@ -1,0 +1,238 @@
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Lenis from 'lenis';
+import { startInfinity } from './infinity';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const finePointer = matchMedia('(pointer: fine)').matches;
+const $$ = <T extends Element = HTMLElement>(s: string, root: ParentNode = document) => [...root.querySelectorAll<T>(s)];
+
+/* ---- smooth scrolling ---- */
+if (!reduced) {
+  const lenis = new Lenis({ duration: 1.1, anchors: { offset: -80 } });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((t) => lenis.raf(t * 1000));
+  gsap.ticker.lagSmoothing(0);
+}
+
+/* ---- nav: glass on scroll, hide on scroll down ---- */
+const nav = document.querySelector<HTMLElement>('.nav');
+if (nav) {
+  let last = 0;
+  const onScroll = () => {
+    const y = scrollY;
+    nav.classList.toggle('is-scrolled', y > 24);
+    nav.classList.toggle('is-hidden', y > 600 && y > last && !document.body.classList.contains('menu-open'));
+    last = y;
+  };
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
+/* ---- mobile menu ---- */
+const menu = document.querySelector<HTMLElement>('.mobile-menu');
+const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+if (menu && toggle) {
+  const set = (open: boolean) => {
+    menu.classList.toggle('is-open', open);
+    document.body.classList.toggle('menu-open', open);
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+    toggle.setAttribute('aria-expanded', String(open));
+    menu.toggleAttribute('inert', !open);
+  };
+  set(false);
+  toggle.addEventListener('click', () => set(!menu.classList.contains('is-open')));
+  $$('a', menu).forEach((a) => a.addEventListener('click', () => set(false)));
+  addEventListener('keydown', (e) => e.key === 'Escape' && set(false));
+}
+
+/* ---- headline word reveal ---- */
+$$('.split').forEach((el) => {
+  // wrap each word of each text node in <span class="w"><span>word</span></span>
+  const walk = (node: Node) => {
+    [...node.childNodes].forEach((n) => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        (n.textContent ?? '').split(/(\s+)/).forEach((part) => {
+          if (!part.trim()) return frag.append(part);
+          const w = document.createElement('span');
+          w.className = 'w';
+          const inner = document.createElement('span');
+          inner.textContent = part;
+          w.append(inner);
+          frag.append(w);
+        });
+        n.replaceWith(frag);
+      } else if (n instanceof HTMLElement && !n.classList.contains('w')) {
+        // keep gradient spans intact: animate them as a single word
+        if (n.classList.contains('em')) {
+          const w = document.createElement('span');
+          w.className = 'w';
+          n.replaceWith(w);
+          const inner = document.createElement('span');
+          inner.append(n);
+          w.append(inner);
+        } else walk(n);
+      }
+    });
+  };
+  walk(el);
+  if (reduced) return;
+  gsap.to($$('.w > span', el), {
+    y: 0,
+    duration: 1.1,
+    ease: 'expo.out',
+    stagger: 0.045,
+    scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+  });
+});
+
+/* ---- generic reveal ---- */
+if (!reduced) {
+  ScrollTrigger.batch('[data-reveal]', {
+    start: 'top 90%',
+    once: true,
+    onEnter: (els) =>
+      gsap.to(els, { opacity: 1, y: 0, duration: 1, ease: 'expo.out', stagger: 0.08, overwrite: true }),
+  });
+}
+
+/* ---- counters ---- */
+$$('[data-count]').forEach((el) => {
+  const target = Number(el.dataset.count);
+  const suffix = el.dataset.suffix ?? '';
+  if (reduced) return void (el.textContent = target + suffix);
+  const o = { v: 0 };
+  gsap.to(o, {
+    v: target,
+    duration: 2.2,
+    ease: 'expo.out',
+    scrollTrigger: { trigger: el, start: 'top 90%', once: true },
+    onUpdate: () => (el.textContent = Math.round(o.v) + suffix),
+  });
+});
+
+/* ---- process rail ---- */
+const steps = document.querySelector<HTMLElement>('.steps');
+if (steps) {
+  const items = $$('.step', steps);
+  const fill = steps.querySelector('.steps-fill');
+  if (reduced) items.forEach((s) => s.classList.add('is-active'));
+  else {
+    if (fill)
+      gsap.to(fill, {
+        scaleY: 1,
+        ease: 'none',
+        scrollTrigger: { trigger: steps, start: 'top 62%', end: 'bottom 62%', scrub: 0.4 },
+      });
+    items.forEach((s) =>
+      ScrollTrigger.create({
+        trigger: s,
+        start: 'top 62%',
+        onEnter: () => s.classList.add('is-active'),
+        onLeaveBack: () => s.classList.remove('is-active'),
+      }),
+    );
+  }
+}
+
+/* ---- parallax ---- */
+if (!reduced)
+  $$('[data-parallax]').forEach((el) =>
+    gsap.to(el, {
+      yPercent: Number(el.dataset.parallax) || -12,
+      ease: 'none',
+      scrollTrigger: { trigger: el.parentElement ?? el, start: 'top bottom', end: 'bottom top', scrub: true },
+    }),
+  );
+
+/* ---- cursor spotlight on cards + magnetic buttons ---- */
+if (finePointer) {
+  $$('.card').forEach((c) =>
+    c.addEventListener('pointermove', (e) => {
+      const r = c.getBoundingClientRect();
+      c.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      c.style.setProperty('--my', `${e.clientY - r.top}px`);
+    }),
+  );
+  if (!reduced)
+    $$('[data-magnetic]').forEach((b) => {
+      const x = gsap.quickTo(b, 'x', { duration: 0.5, ease: 'power3' });
+      const y = gsap.quickTo(b, 'y', { duration: 0.5, ease: 'power3' });
+      b.addEventListener('pointermove', (e) => {
+        const r = b.getBoundingClientRect();
+        x((e.clientX - r.left - r.width / 2) * 0.25);
+        y((e.clientY - r.top - r.height / 2) * 0.35);
+      });
+      b.addEventListener('pointerleave', () => (x(0), y(0)));
+    });
+}
+
+/* ---- live clocks ---- */
+const clocks = $$('[data-tz]');
+if (clocks.length) {
+  const tick = () =>
+    clocks.forEach((c) => {
+      try {
+        c.textContent = new Intl.DateTimeFormat(document.documentElement.lang, {
+          hour: '2-digit',
+          minute: '2-digit',
+          timeZone: c.dataset.tz,
+        }).format(new Date());
+      } catch {
+        /* unsupported time zone: leave blank */
+      }
+    });
+  tick();
+  setInterval(tick, 15_000);
+}
+
+/* ---- hero canvas ---- */
+const canvas = document.querySelector<HTMLCanvasElement>('#infinity');
+if (canvas) startInfinity(canvas, reduced);
+
+/* ---- contact form ---- */
+const form = document.querySelector<HTMLFormElement>('#contact-form');
+if (form) {
+  const status = form.querySelector<HTMLElement>('[data-status]')!;
+  const btn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+  const label = btn.querySelector('span')!;
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
+    if (data.website) return; // honeypot
+    const endpoint = form.dataset.endpoint;
+    const idle = label.textContent;
+    const done = (ok: boolean) => {
+      status.hidden = false;
+      status.dataset.state = ok ? 'ok' : 'error';
+      status.querySelector('[data-ok]')!.toggleAttribute('hidden', !ok);
+      status.querySelector('[data-error]')!.toggleAttribute('hidden', ok);
+      label.textContent = idle;
+      btn.disabled = false;
+      if (ok) form.reset();
+    };
+    if (!endpoint) {
+      // No backend configured: hand over to the visitor's mail client.
+      const body = `${data.message}\n\n${data.name}\n${data.company ?? ''}\n${data.email}`;
+      location.href = `mailto:${form.dataset.mailto}?subject=${encodeURIComponent(
+        `[${data.interest ?? 'Website'}] ${data.company || data.name}`,
+      )}&body=${encodeURIComponent(body)}`;
+      return;
+    }
+    btn.disabled = true;
+    label.textContent = form.dataset.sending ?? '…';
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(data),
+      });
+      done(res.ok);
+    } catch {
+      done(false);
+    }
+  });
+}

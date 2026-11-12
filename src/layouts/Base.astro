@@ -1,0 +1,54 @@
+---
+import '@/styles/global.css';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+import { getCopy, href, htmlLang, langs, defaultLang, type Lang } from '@/i18n';
+import { site } from '@/site';
+interface Props { lang: Lang; path: string; title?: string; description?: string }
+const { lang, path, title, description } = Astro.props;
+const t = getCopy(lang);
+const pageTitle = title ?? t.meta.title;
+const desc = description ?? t.meta.description;
+const abs = (p: string) => new URL(p, site.url).href;
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: site.name,
+  url: site.url,
+  email: site.email,
+  telephone: site.phone,
+  description: t.meta.description,
+  address: { '@type': 'PostalAddress', streetAddress: site.address.slice(0, 3).join(', '), postalCode: '20042', addressLocality: 'Casablanca', addressCountry: 'MA' },
+  areaServed: ['North America', 'Europe', 'Morocco', 'Africa'],
+};
+---
+<!doctype html>
+<html lang={htmlLang[lang]} id="top">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={desc} />
+    <link rel="canonical" href={abs(href(path, lang))} />
+    {langs.map((l) => <link rel="alternate" hreflang={htmlLang[l]} href={abs(href(path, l))} />)}
+    <link rel="alternate" hreflang="x-default" href={abs(href(path, defaultLang))} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#07051a" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:url" content={abs(href(path, lang))} />
+    <meta property="og:image" content={abs('/og.png')} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+    <script is:inline>document.documentElement.classList.add('js')</script>
+  </head>
+  <body>
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:z-[60] focus:top-3 focus:left-3 focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:rounded-full">{t.nav.skip}</a>
+    <Nav lang={lang} t={t} path={path} />
+    <main id="main"><slot /></main>
+    <Footer lang={lang} t={t} />
+    <script>import '@/scripts/motion';</script>
+  </body>
+</html>

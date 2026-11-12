@@ -1,0 +1,85 @@
+---
+// Small animated illustration for each service. Pure SVG + CSS.
+interface Props { slug: string }
+const { slug } = Astro.props;
+const V = '#8B5CFF', A = '#FEB85D', L = 'rgba(255,255,255,.14)', T = 'rgba(255,255,255,.55)';
+---
+<div class="viz" aria-hidden="true">
+  {slug === 'data-platforms' && (
+    <svg viewBox="0 0 320 150" preserveAspectRatio="xMidYMid meet">
+      {[30, 75, 120].map((y) => <><rect x="18" y={y - 11} width="58" height="22" rx="6" fill="none" stroke={L} /><path class="dash" d={`M76 ${y} C120 ${y},120 75,150 75`} fill="none" stroke={V} stroke-width="1.5" /></>)}
+      <rect x="150" y="45" width="60" height="60" rx="12" fill="rgba(139,92,255,.18)" stroke={V} />
+      <circle class="pulse" cx="180" cy="75" r="7" fill={A} />
+      <path class="dash" d="M210 75 H250" stroke={A} stroke-width="1.5" />
+      <rect x="250" y="52" width="52" height="46" rx="8" fill="none" stroke={L} />
+      {[0, 1, 2].map((i) => <rect class="bar" style={`animation-delay:${i * 0.4}s`} x={260 + i * 12} y={90 - 14 - i * 8} width="7" height={14 + i * 8} rx="2" fill={i === 2 ? A : V} />)}
+    </svg>
+  )}
+  {slug === 'data-products' && (
+    <svg viewBox="0 0 320 150" preserveAspectRatio="xMidYMid meet">
+      {[0, 1, 2, 3, 4, 5].map((i) => {
+        const x = 40 + (i % 3) * 84, y = 22 + Math.floor(i / 3) * 58;
+        return <g><rect x={x} y={y} width="72" height="46" rx="10" fill={i === 4 ? 'rgba(139,92,255,.22)' : 'rgba(255,255,255,.03)'} stroke={i === 4 ? V : L} />
+          <circle class={i === 4 ? 'pulse' : ''} cx={x + 14} cy={y + 14} r="4" fill={i % 2 ? A : V} />
+          <rect x={x + 10} y={y + 26} width={38 + (i % 2) * 14} height="4" rx="2" fill={T} opacity=".5" /><rect x={x + 10} y={y + 34} width="26" height="4" rx="2" fill={T} opacity=".25" /></g>;
+      })}
+    </svg>
+  )}
+  {slug === 'microsoft-fabric' && (
+    <svg viewBox="0 0 320 150" preserveAspectRatio="xMidYMid meet">
+      {[['#B4793C', 104], ['#C9CEDA', 76], [A, 48]].map(([c, y], i) => (
+        <g class="pulse" style={`animation-delay:${i * 0.5}s;animation-duration:4s`}>
+          <path d={`M160 ${Number(y) - 22} L250 ${y} L160 ${Number(y) + 22} L70 ${y} Z`} fill={`${c}22`} stroke={String(c)} stroke-width="1.2" />
+        </g>
+      ))}
+      <path class="dash" d="M160 20 V8 M160 142 V128" stroke={V} stroke-width="1.5" />
+      <text x="262" y="52" fill={T} font-size="9" font-family="monospace">GOLD</text>
+      <text x="262" y="80" fill={T} font-size="9" font-family="monospace">SILVER</text>
+      <text x="262" y="108" fill={T} font-size="9" font-family="monospace">BRONZE</text>
+    </svg>
+  )}
+  {slug === 'power-bi' && (
+    <svg viewBox="0 0 320 150" preserveAspectRatio="xMidYMid meet">
+      {[38, 70, 102].map((y) => <line x1="24" x2="296" y1={y} y2={y} stroke={L} stroke-dasharray="2 6" />)}
+      {[46, 72, 58, 96, 80, 112, 100].map((hgt, i) => <rect class="bar" style={`animation-delay:${i * 0.22}s`} x={34 + i * 38} y={130 - hgt} width="20" height={hgt} rx="5" fill={i === 5 ? A : V} opacity={i === 5 ? 1 : 0.55 + i * 0.06} />)}
+      <path class="draw" d="M44 92 L82 70 L120 80 L158 46 L196 58 L234 26 L272 34" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  )}
+  {slug === 'ai-consultancy' && (
+    <svg viewBox="0 0 320 150" preserveAspectRatio="xMidYMid meet">
+      {[[60, 40], [60, 110], [130, 75], [200, 36], [200, 114], [262, 75]].map(([x, y], i, arr) => arr.slice(i + 1).filter(([x2]) => x2 - x > 0 && x2 - x < 90).map(([x2, y2]) => <line class="dash" x1={x} y1={y} x2={x2} y2={y2} stroke={V} stroke-width="1" opacity=".7" />))}
+      {[[60, 40], [60, 110], [130, 75], [200, 36], [200, 114], [262, 75]].map(([x, y], i) => <circle class="pulse" style={`animation-delay:${i * 0.3}s`} cx={x} cy={y} r={i === 5 ? 11 : 7} fill={i === 5 ? A : '#1b1440'} stroke={i === 5 ? A : V} stroke-width="1.5" />)}
+    </svg>
+  )}
+  {slug === 'training' && (
+    <svg viewBox="0 0 320 150" preserveAspectRatio="xMidYMid meet">
+      {['Power BI', 'Fabric', 'Microsoft 365'].map((n, i) => (
+        <g>
+          <text x="28" y={38 + i * 40} fill={T} font-size="10" font-family="monospace">{n}</text>
+          <rect x="28" y={46 + i * 40} width="264" height="8" rx="4" fill="rgba(255,255,255,.07)" />
+          <rect class="bar" style={`transform-origin:left;animation-name:growx;animation-delay:${i * 0.5}s`} x="28" y={46 + i * 40} width={[236, 190, 150][i]} height="8" rx="4" fill={i === 0 ? A : V} />
+        </g>
+      ))}
+    </svg>
+  )}
+  {slug === 'sales-forecasting' && (
+    <svg viewBox="0 0 320 150" preserveAspectRatio="xMidYMid meet">
+      {[40, 75, 110].map((y) => <line x1="20" x2="300" y1={y} y2={y} stroke={L} stroke-dasharray="2 6" />)}
+      <path d="M24 112 L60 98 L96 104 L132 78 L168 84 L196 62" fill="none" stroke={V} stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M196 62 L232 48 L268 36 L298 22 L298 62 L268 60 L232 62 Z" fill="rgba(254,184,93,.14)" />
+      <path class="dash" d="M196 62 L232 52 L268 44 L298 34" fill="none" stroke={A} stroke-width="2.2" stroke-linecap="round" />
+      <circle class="pulse" cx="196" cy="62" r="5" fill="#fff" />
+      <line x1="196" x2="196" y1="18" y2="132" stroke={L} />
+    </svg>
+  )}
+  {slug === 'ai-agents' && (
+    <div class="absolute inset-0 p-4 flex flex-col justify-center gap-2.5 text-[0.72rem] font-mono">
+      <div class="self-end max-w-[78%] rounded-2xl rounded-br-sm px-3 py-2 bg-brand text-white">Why did margin drop in Q3?</div>
+      <div class="self-start max-w-[86%] rounded-2xl rounded-bl-sm px-3 py-2 border border-line bg-white/5 text-[#d6cfff]">Freight costs rose 12% in EMEA. <span class="text-amber">See breakdown →</span></div>
+      <div class="self-start rounded-2xl px-3 py-2.5 border border-line bg-white/5 typing"><span></span><span></span><span></span></div>
+    </div>
+  )}
+</div>
+<style is:global>
+  @keyframes growx { from { transform: scaleX(0.3); } to { transform: scaleX(1); } }
+</style>

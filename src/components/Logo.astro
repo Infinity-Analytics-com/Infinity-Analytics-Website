@@ -1,0 +1,15 @@
+---
+// Wordmark + infinity mark. Swap the SVG below for the official logo file if preferred.
+const id = 'lg' + Math.random().toString(36).slice(2, 7);
+---
+<span class="inline-flex items-center gap-2.5 font-medium tracking-tight text-[1.05rem]">
+  <svg width="34" height="20" viewBox="0 0 68 40" fill="none" aria-hidden="true">
+    <defs>
+      <linearGradient id={id} x1="0" x2="68" y1="0" y2="40" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#A07BFF" /><stop offset="1" stop-color="#FEB85D" />
+      </linearGradient>
+    </defs>
+    <path d="M34 20c-6-10-11-14-17-14a14 14 0 1 0 0 28c6 0 11-4 17-14Zm0 0c6 10 11 14 17 14a14 14 0 1 0 0-28c-6 0-11 4-17 14Z" stroke={`url(#${id})`} stroke-width="6" stroke-linecap="round" />
+  </svg>
+  <span>Infinity <span class="text-muted">Analytics</span></span>
+</span>

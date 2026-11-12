@@ -1,0 +1,45 @@
+---
+import Logo from './Logo.astro';
+import Arrow from './Arrow.astro';
+import { href, langs, langNames, type Lang } from '@/i18n';
+import type { Copy } from '@/i18n/en';
+interface Props { lang: Lang; t: Copy; path: string }
+const { lang, t, path } = Astro.props;
+const home = href('/', lang);
+const links = [
+  { label: t.nav.services, to: home + '#services' },
+  { label: t.nav.approach, to: home + '#approach' },
+  { label: t.nav.products, to: home + '#products' },
+  { label: t.nav.clients, to: home + '#clients' },
+  { label: t.nav.contact, to: href('/contact', lang) },
+];
+---
+<header class="nav">
+  <div class="wrap">
+    <div class="nav-inner">
+      <a href={home} aria-label="Infinity Analytics"><Logo /></a>
+      <nav class="hidden lg:flex items-center gap-1" aria-label="Main">
+        {links.map((l) => <a class="nav-link" href={l.to}>{l.label}</a>)}
+      </nav>
+      <div class="flex items-center gap-2">
+        {langs.length > 1 && (
+          <div class="hidden sm:flex items-center font-mono text-xs rounded-full border border-line p-1">
+            {langs.map((l) => (
+              <a href={href(path, l)} hreflang={l} aria-current={l === lang ? 'true' : undefined}
+                class:list={['px-2.5 py-1.5 rounded-full transition-colors', l === lang ? 'bg-white/12 text-white' : 'text-muted hover:text-white']}>{langNames[l]}</a>
+            ))}
+          </div>
+        )}
+        <a class="btn btn-primary btn-sm" href={href('/contact', lang)}>{t.nav.cta}<Arrow /></a>
+        <button class="btn btn-ghost btn-sm" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu">{t.nav.menu}</button>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobile-menu">
+  {links.map((l) => <a class="big" href={l.to}>{l.label}</a>)}
+  <div class="mt-8 flex items-center gap-3">
+    <a class="btn btn-primary" href={href('/contact', lang)}>{t.nav.cta}<Arrow /></a>
+    {langs.filter((l) => l !== lang).map((l) => <a class="btn btn-ghost" href={href(path, l)} hreflang={l}>{langNames[l]}</a>)}
+  </div>
+</div>

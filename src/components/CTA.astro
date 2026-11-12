@@ -1,0 +1,21 @@
+---
+import Arrow from './Arrow.astro';
+import { href, type Lang } from '@/i18n';
+import type { Copy } from '@/i18n/en';
+import { site } from '@/site';
+interface Props { lang: Lang; t: Copy }
+const { lang, t } = Astro.props;
+---
+<section class="section !pt-0">
+  <div class="wrap">
+    <div class="card text-center px-6 py-20 md:py-28" data-reveal>
+      <div class="absolute inset-0 -z-10" style="background:radial-gradient(40rem 22rem at 50% 120%, rgb(94 44 237 / .55), transparent 70%), radial-gradient(22rem 14rem at 50% 115%, rgb(254 184 93 / .35), transparent 70%)"></div>
+      <h2 class="display split max-w-4xl mx-auto" style="font-size:clamp(2.3rem,6vw,5rem)">{t.cta.title} <span class="em">{t.cta.titleEm}</span></h2>
+      <p class="lead max-w-xl mx-auto mt-7">{t.cta.sub}</p>
+      <div class="mt-10 flex flex-wrap justify-center gap-3">
+        <a class="btn btn-primary" data-magnetic href={href('/contact', lang)}>{t.cta.primary}<Arrow /></a>
+        <a class="btn btn-ghost" href={site.whatsapp} target="_blank" rel="noopener">{t.cta.secondary}</a>
+      </div>
+    </div>
+  </div>
+</section>
