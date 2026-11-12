@@ -19,7 +19,7 @@ const menu: { label: string; to: string; cols?: Col[] }[] = [
     { title: t.nav.solutions, links: of('product').map(link) },
   ] },
   { label: t.nav.technologies, to: home + '#technologies', cols: [{ links: of('technology').map(link) }] },
-  { label: t.nav.training, to: href('/training', lang), cols: [{ links: [...courses.map(link), { label: t.nav.allTraining, to: href('/training', lang) }] }] },
+  { label: t.nav.training, to: href('/training', lang), cols: [{ links: courses.map(link) }] },
   { label: t.nav.contact, to: href('/contact', lang) },
 ];
 ---
