@@ -191,6 +191,47 @@ if (finePointer) {
     });
 }
 
+/* ---- showcase carousel ---- */
+$$('[data-showcase]').forEach((sc) => {
+  const track = sc.querySelector<HTMLElement>('[data-sc-track]')!;
+  const prev = sc.querySelector<HTMLButtonElement>('[data-sc-prev]')!;
+  const next = sc.querySelector<HTMLButtonElement>('[data-sc-next]')!;
+  const step = () => (track.querySelector<HTMLElement>('.sc-slide')?.offsetWidth ?? 600) + 24;
+  const update = () => {
+    prev.disabled = track.scrollLeft < 8;
+    next.disabled = track.scrollLeft > track.scrollWidth - track.clientWidth - 8;
+  };
+  const go = (dir: number) => track.scrollBy({ left: dir * step(), behavior: reduced ? 'auto' : 'smooth' });
+  prev.addEventListener('click', () => go(-1));
+  next.addEventListener('click', () => go(1));
+  track.addEventListener('scroll', update, { passive: true });
+  track.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') (e.preventDefault(), go(1));
+    if (e.key === 'ArrowLeft') (e.preventDefault(), go(-1));
+  });
+  // drag to scroll with a mouse
+  let down = false, startX = 0, startLeft = 0;
+  track.addEventListener('pointerdown', (e) => {
+    if (e.pointerType !== 'mouse') return;
+    down = true; startX = e.clientX; startLeft = track.scrollLeft;
+  });
+  addEventListener('pointermove', (e) => {
+    if (!down) return;
+    if (Math.abs(e.clientX - startX) > 4) track.classList.add('is-dragging');
+    track.scrollLeft = startLeft - (e.clientX - startX);
+  });
+  addEventListener('pointerup', () => {
+    if (!down) return;
+    down = false;
+    if (track.classList.contains('is-dragging')) {
+      track.classList.remove('is-dragging');
+      const i = Math.round(track.scrollLeft / step());
+      track.scrollTo({ left: i * step(), behavior: reduced ? 'auto' : 'smooth' });
+    }
+  });
+  update();
+});
+
 /* ---- live clocks ---- */
 const clocks = $$('[data-tz]');
 if (clocks.length) {

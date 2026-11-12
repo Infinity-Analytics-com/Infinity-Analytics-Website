@@ -22,6 +22,7 @@ Requires Node 20+. The output in `dist/` is plain static files and can be hosted
 | All copy, English | `src/i18n/en.ts` |
 | All copy, French | `src/i18n/fr.ts` |
 | Contact details, client names, testimonials | `src/site.ts` |
+| Showcase designs (drawn as SVG at build time) | `src/mocks.ts`, `src/components/Showcase.astro` |
 | Colours, fonts, component styles | `src/styles/global.css` |
 | Scroll animation, hero canvas, form logic | `src/scripts/` |
 | Pages | `src/pages/[...lang]/` |

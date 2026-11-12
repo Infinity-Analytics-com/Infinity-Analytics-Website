@@ -1,0 +1,43 @@
+---
+// Horizontal carousel of showcase concepts (see src/mocks.ts).
+// To use real project screenshots, replace a slide's <Fragment set:html> with an <img>.
+import { mocks, showcaseFor } from '@/mocks';
+import type { Copy } from '@/i18n/en';
+interface Props { t: Copy; page: string }
+const { t, page } = Astro.props;
+const ids = showcaseFor[page] ?? showcaseFor.home;
+const s = t.showcase;
+---
+<section class="section !pt-0 showcase" data-showcase>
+  <div class="wrap">
+    <div class="flex flex-wrap items-end justify-between gap-8">
+      <div class="max-w-2xl">
+        <p class="eyebrow" data-reveal>{s.eyebrow}</p>
+        <h2 class="h2 split mt-5">{s.title} <span class="em">{s.titleEm}</span></h2>
+        <p class="lead mt-5 max-w-xl" data-reveal>{s.sub}</p>
+      </div>
+      <div class="flex items-center gap-2" data-reveal>
+        <button class="sc-btn" type="button" data-sc-prev aria-label={s.prev}><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3m0 0 4-4M3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="sc-btn" type="button" data-sc-next aria-label={s.next}><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+  </div>
+  <div class="sc-track mt-12" data-sc-track data-lenis-prevent-touch tabindex="0" role="group" aria-label={s.eyebrow}>
+    {ids.map((id, i) => {
+      const m = mocks[id];
+      return (
+        <figure class="sc-slide" data-reveal>
+          <div class="sc-window">
+            <div class="sc-bar"><i></i><i></i><i></i><span>{m.title}</span></div>
+            <Fragment set:html={m.svg} />
+          </div>
+          <figcaption class="mt-4 flex items-center justify-between gap-3 px-1">
+            <span class="font-medium tracking-tight">{m.title}</span>
+            <span class="flex items-center gap-3"><span class="chip">{s.kinds[m.kind]}</span><span class="font-mono text-xs text-muted tabular-nums">{String(i + 1).padStart(2, '0')}/{String(ids.length).padStart(2, '0')}</span></span>
+          </figcaption>
+        </figure>
+      );
+    })}
+  </div>
+  <div class="wrap"><p class="mt-6 font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted" data-reveal>{s.note}</p></div>
+</section>

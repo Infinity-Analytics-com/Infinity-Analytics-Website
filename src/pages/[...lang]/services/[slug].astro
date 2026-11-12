@@ -3,6 +3,8 @@ import Base from '@/layouts/Base.astro';
 import Arrow from '@/components/Arrow.astro';
 import CTA from '@/components/CTA.astro';
 import ServiceViz from '@/components/ServiceViz.astro';
+import Showcase from '@/components/Showcase.astro';
+import { mocks, showcaseFor } from '@/mocks';
 import { getCopy, href, langs, defaultLang, resolveLang } from '@/i18n';
 import { en } from '@/i18n/en';
 export const getStaticPaths = () =>
@@ -26,7 +28,11 @@ const next = items[(idx + 1) % items.length];
           <a class="btn btn-primary" data-magnetic href={href('/contact', lang)}>{t.hero.primary}<Arrow /></a>
         </div>
       </div>
-      <div class="card p-4" data-reveal><div class="[&_.viz]:h-56 md:[&_.viz]:h-64"><ServiceViz slug={s.slug} /></div></div>
+      <div class="card p-4" data-reveal>
+        {s.kind === 'product'
+          ? <div class="viz mockviz" set:html={mocks[showcaseFor[s.slug][0]].svg} />
+          : <div class="[&_.viz]:h-56 md:[&_.viz]:h-64"><ServiceViz slug={s.slug} /></div>}
+      </div>
     </div>
   </section>
 
@@ -68,6 +74,8 @@ const next = items[(idx + 1) % items.length];
       </div>
     </div>
   </section>
+
+  <Showcase t={t} page={s.slug} />
 
   <CTA lang={lang} t={t} />
 </Base>

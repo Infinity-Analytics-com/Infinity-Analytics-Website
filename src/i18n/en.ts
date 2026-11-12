@@ -5,7 +5,7 @@ export const en = {
   meta: {
     title: 'Infinity Analytics | Data platforms, Microsoft Fabric, Power BI & AI consulting',
     description:
-      'Infinity Analytics designs, builds and runs modern data platforms, data products and AI solutions on Microsoft Fabric and Power BI. 150+ projects delivered for 50+ customers on five continents.',
+      'Infinity Analytics designs, builds and runs modern data platforms, business apps and AI solutions on Microsoft Fabric and Power BI. 150+ projects delivered for 50+ customers on five continents.',
   },
   nav: {
     services: 'Services',
@@ -23,7 +23,7 @@ export const en = {
     eyebrow: 'Data & AI consultancy · Microsoft Fabric · Power BI',
     titleA: 'Data that moves at the speed of your',
     titleEm: 'decisions.',
-    sub: 'We design, build and run modern data platforms, data products and AI solutions, so your teams stop chasing numbers and start acting on them.',
+    sub: 'We design, build and run modern data platforms, analytics, business apps and AI solutions, so your teams stop chasing numbers and start acting on them.',
     primary: 'Book a discovery call',
     secondary: 'Explore our services',
     chips: [
@@ -64,21 +64,21 @@ export const en = {
         stack: ['Microsoft Fabric', 'Azure', 'OneLake', 'Synapse', 'Databricks', 'SQL', 'dbt'],
       },
       {
-        slug: 'data-products',
+        slug: 'apps-development',
         kind: 'service',
-        name: 'Data Products',
-        tag: 'Value',
-        short: 'Datasets, metrics and analytics apps treated as products, with owners, quality standards and users who love them.',
+        name: 'Apps Development',
+        tag: 'Build',
+        short: 'Custom business apps, portals and internal tools that put your data to work, from Power Apps to full web and mobile applications.',
         intro:
-          'Data only creates value when people use it. We help you package data into products: well-defined, documented and reliable assets that teams can discover, trust and reuse instead of rebuilding the same report again and again.',
+          'Dashboards tell you what is happening. Apps let your teams act on it. We design and build business applications on top of your data: internal tools that replace spreadsheets, customer portals, mobile apps for the field and analytics embedded in your own product.',
         deliverables: [
-          { t: 'Product discovery', d: 'We map the decisions that matter and the data products that would serve them.' },
-          { t: 'Semantic models', d: 'Certified, reusable models with consistent KPIs and business definitions.' },
-          { t: 'Analytics apps', d: 'Embedded analytics and self-service experiences built for real users.' },
-          { t: 'Operating model', d: 'Ownership, SLAs and lifecycle so each product keeps getting better.' },
+          { t: 'Discovery & UX design', d: 'We map the workflow, prototype the screens and validate them with real users before building.' },
+          { t: 'Low-code apps', d: 'Power Apps and Power Automate for internal tools and approval flows delivered in weeks.' },
+          { t: 'Custom web & mobile apps', d: 'Full-code applications when you need complete control over experience, scale and integration.' },
+          { t: 'Embedded analytics & integration', d: 'Power BI embedded in your apps, APIs and secure connections to your data platform.' },
         ],
-        outcomes: ['Less duplicated work across teams', 'KPIs everyone agrees on', 'Higher adoption of analytics'],
-        stack: ['Semantic models', 'Power BI Apps', 'Fabric Data Marts', 'APIs', 'Purview'],
+        outcomes: ['Spreadsheets and manual steps replaced by one tool', 'Clean data captured at the source', 'Apps your teams actually enjoy using'],
+        stack: ['Power Apps', 'Power Automate', 'Dataverse', 'React', 'TypeScript', 'Power BI Embedded', 'APIs'],
       },
       {
         slug: 'microsoft-fabric',
@@ -182,6 +182,74 @@ export const en = {
         outcomes: ['Answers in seconds, not tickets', 'Insight for people who never open a dashboard', 'More time for your data team'],
         stack: ['Azure OpenAI', 'Copilot Studio', 'Fabric Data Agents', 'Microsoft Teams'],
       },
+      {
+        slug: 'executive-cockpit',
+        kind: 'product',
+        name: 'Executive Cockpit',
+        tag: 'Product',
+        short: 'Your whole business on one screen. Revenue, margin, cash and operations in a single Power BI cockpit built for leadership.',
+        intro:
+          'The Executive Cockpit gives your leadership team one trusted view of the business. We connect your key systems, agree the KPIs that matter and deliver a cockpit that answers the Monday-morning questions before anyone asks them.',
+        deliverables: [
+          { t: 'KPI framework', d: 'We define and document the handful of indicators leadership will actually steer by.' },
+          { t: 'Connected data', d: 'Finance, sales and operations data consolidated into one governed model.' },
+          { t: 'Cockpit design', d: 'A clear, fast, mobile-ready Power BI experience with drill-down to the detail.' },
+          { t: 'Alerts & commentary', d: 'Thresholds, subscriptions and AI summaries so exceptions find you first.' },
+        ],
+        outcomes: ['One version of the truth in every meeting', 'Decisions taken on this week’s data', 'Less time building slides'],
+        stack: ['Power BI', 'Microsoft Fabric', 'Copilot', 'Mobile'],
+      },
+      {
+        slug: 'finance-analytics',
+        kind: 'product',
+        name: 'Finance Analytics',
+        tag: 'Product',
+        short: 'P&L, budget versus actual and cash flow connected to your ERP, refreshed automatically and ready for month end.',
+        intro:
+          'Finance Analytics replaces manual month-end spreadsheets with a governed reporting model. Your P&L, balance sheet, cash and variance analysis are refreshed automatically from your ERP, so finance spends its time explaining the numbers, not assembling them.',
+        deliverables: [
+          { t: 'ERP connection', d: 'Automated extraction from your accounting system and chart-of-accounts mapping.' },
+          { t: 'Financial model', d: 'P&L, balance sheet and cash flow with entities, cost centres and currencies handled.' },
+          { t: 'Budget & forecast', d: 'Actual versus budget and forecast, with variance bridges and commentary.' },
+          { t: 'Controls & security', d: 'Reconciliation checks and role-based access down to entity and cost centre.' },
+        ],
+        outcomes: ['A faster, calmer month-end close', 'Variances explained, not just reported', 'Finance trusted as a business partner'],
+        stack: ['Power BI', 'Microsoft Fabric', 'Dynamics 365', 'SAP', 'Sage', 'Excel'],
+      },
+      {
+        slug: 'fabric-jumpstart',
+        kind: 'product',
+        name: 'Fabric Jumpstart',
+        tag: 'Product',
+        short: 'A fixed-scope start on Microsoft Fabric: a working lakehouse, your first use case in production and a roadmap for the rest.',
+        intro:
+          'Fabric Jumpstart takes you from interest to a working platform. We set up your Fabric environment properly, deliver one real use case end to end and leave you with the architecture, standards and roadmap to scale with confidence.',
+        deliverables: [
+          { t: 'Environment setup', d: 'Capacity, workspaces, security and deployment pipelines configured to best practice.' },
+          { t: 'First use case', d: 'One priority data source taken from ingestion to a Direct Lake report in production.' },
+          { t: 'Standards & templates', d: 'Naming, medallion layers and reusable pipeline patterns your team can copy.' },
+          { t: 'Roadmap & handover', d: 'A costed plan for the next use cases and a trained internal team.' },
+        ],
+        outcomes: ['Value delivered from the first weeks', 'A platform built the right way from day one', 'A clear, costed path to scale'],
+        stack: ['Microsoft Fabric', 'OneLake', 'Data Factory', 'Direct Lake', 'Power BI'],
+      },
+      {
+        slug: 'power-bi-health-check',
+        kind: 'product',
+        name: 'Power BI Health Check',
+        tag: 'Product',
+        short: 'An expert audit of your Power BI estate: performance, data models, governance and cost, with a prioritised action plan.',
+        intro:
+          'Slow reports, duplicated datasets and rising capacity costs are signs of a Power BI estate that grew faster than its governance. Our Health Check reviews your tenant end to end and gives you a clear, prioritised plan to fix it.',
+        deliverables: [
+          { t: 'Performance review', d: 'Slow reports and heavy models profiled, with the DAX and modelling fixes identified.' },
+          { t: 'Model & data audit', d: 'Duplicates, refresh failures and risky dependencies mapped across workspaces.' },
+          { t: 'Governance & security', d: 'Workspace structure, access, certification and deployment practices assessed.' },
+          { t: 'Action plan', d: 'Quick wins and structural fixes ranked by impact and effort.' },
+        ],
+        outcomes: ['Faster reports for every user', 'Lower capacity and licence costs', 'A tenant your team can keep under control'],
+        stack: ['Power BI', 'DAX Studio', 'Tabular Editor', 'Fabric Capacity Metrics'],
+      },
     ],
   },
   stats: {
@@ -208,8 +276,18 @@ export const en = {
   },
   products: {
     eyebrow: 'Products',
-    title: 'Ready-made accelerators, tailored to',
+    title: 'Proven solutions, tailored to',
     titleEm: 'your data.',
+  },
+  showcase: {
+    eyebrow: 'Showcase',
+    title: 'The kind of work we',
+    titleEm: 'love to ship.',
+    sub: 'Dashboards, apps and AI experiences designed the way we build them for clients.',
+    note: 'Design concepts shown with sample data.',
+    kinds: { dashboard: 'Dashboard', platform: 'Data platform', ai: 'AI', app: 'App' },
+    prev: 'Previous',
+    next: 'Next',
   },
   values: {
     eyebrow: 'Why Infinity Analytics',
@@ -231,7 +309,7 @@ export const en = {
     regions: [
       { name: 'North America', city: 'New York', tz: 'America/New_York', d: 'Remote-first delivery with daily overlap for US and Canadian teams.' },
       { name: 'Europe', city: 'Paris', tz: 'Europe/Paris', d: 'Same working day, in English or French, with on-site workshops when needed.' },
-      { name: 'Morocco', city: 'Casablanca', tz: 'Africa/Casablanca', d: 'Our home base. On-site consulting and training across the Kingdom.' },
+      { name: 'MENA', city: 'Casablanca', tz: 'Africa/Casablanca', d: 'Our home region, from Morocco to the Gulf, with on-site consulting and training when you need it.' },
       { name: 'Africa', city: 'Dakar', tz: 'Africa/Dakar', d: 'Supporting organisations across the continent as they modernise their data.' },
     ],
   },
@@ -275,7 +353,7 @@ export const en = {
     },
   },
   footer: {
-    blurb: 'Fast insights, trusted data solutions. Data platforms, data products, Microsoft Fabric, Power BI, AI and training.',
+    blurb: 'Fast insights, trusted data solutions. Data platforms, apps development, Microsoft Fabric, Power BI, AI and training.',
     services: 'Services',
     products: 'Products',
     company: 'Company',
