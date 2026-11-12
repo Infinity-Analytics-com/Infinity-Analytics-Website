@@ -12,7 +12,7 @@ const lang = resolveLang(Astro.params.lang);
 const t = getCopy(lang);
 const services = t.services.items.filter((s) => s.kind === 'service');
 const products = t.services.items.filter((s) => s.kind === 'product');
-const span = ['md:col-span-4', 'md:col-span-2', 'md:col-span-3', 'md:col-span-3', 'md:col-span-2', 'md:col-span-4'];
+const span = ['md:col-span-2', 'md:col-span-4', 'md:col-span-3', 'md:col-span-3', 'md:col-span-4', 'md:col-span-2'];
 const half = Math.ceil(testimonials.length / 2);
 const rows = [testimonials.slice(0, half), testimonials.slice(half)];
 ---
