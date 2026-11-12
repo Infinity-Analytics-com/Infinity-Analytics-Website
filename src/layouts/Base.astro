@@ -25,7 +25,7 @@ const ld = {
 };
 ---
 <!doctype html>
-<html lang={htmlLang[lang]} id="top" data-theme="dark">
+<html lang={htmlLang[lang]} id="top" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -36,7 +36,7 @@ const ld = {
     {langs.map((l) => <link rel="alternate" hreflang={htmlLang[l]} href={abs(href(path, l))} />)}
     <link rel="alternate" hreflang="x-default" href={abs(href(path, defaultLang))} />
     <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
-    <meta name="theme-color" content="#07051a" />
+    <meta name="theme-color" content="#f6f4ff" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={pageTitle} />
@@ -46,12 +46,12 @@ const ld = {
     <meta name="twitter:card" content="summary_large_image" />
     <script type="application/ld+json" set:html={JSON.stringify(ld)} />
     <script is:inline>
-      // Runs before paint: enable JS-only styles and restore the saved theme (dark by default).
+      // Runs before paint: enable JS-only styles and restore the saved theme (light by default).
       (function () {
-        var d = document.documentElement, t = 'dark';
+        var d = document.documentElement, t = 'light';
         d.classList.add('js');
         try { t = localStorage.getItem('theme') || t; } catch (e) {}
-        d.dataset.theme = t === 'light' ? 'light' : 'dark';
+        d.dataset.theme = t === 'dark' ? 'dark' : 'light';
       })();
     </script>
   </head>
