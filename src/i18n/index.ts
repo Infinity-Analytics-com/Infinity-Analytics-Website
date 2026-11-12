@@ -51,7 +51,7 @@ export function itemPaths(match: (item: Item) => boolean, param: (item: Item) =>
 /** Menu order: what visitors are most likely to be looking for comes first. */
 const interest = [
   'ai-readiness', 'ai-adoption', 'ai-consultancy', 'data-platforms', 'apps-development',
-  'ai-agents', 'executive-cockpit', 'sales-forecasting', 'finance-analytics', 'fabric-jumpstart', 'power-bi-health-check',
+  'ai-agents', 'executive-dashboards', 'sales-forecasting', 'finance-dashboards', 'fabric-jumpstart', 'power-bi-health-check',
 ];
 const rank = (slug: string) => (interest.indexOf(slug) + 1 || interest.length + 1);
 export const byInterest = <T extends { slug: string }>(items: T[]): T[] =>

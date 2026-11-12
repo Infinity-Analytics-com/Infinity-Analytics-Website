@@ -175,7 +175,7 @@ export const fr: Copy = {
       {
         slug: 'ai-consultancy',
         kind: 'service',
-        name: 'Conseil en IA',
+        name: 'Développement IA sur mesure',
         tag: 'Intelligence',
         short: 'Du choix des cas d’usage à la mise en production : agents IA sur mesure, copilotes et modèles prédictifs ancrés dans vos données.',
         intro:
@@ -184,9 +184,9 @@ export const fr: Copy = {
           { t: 'Diagnostic d’opportunités IA', d: 'Une liste priorisée de cas d’usage, avec la valeur attendue, l’effort et le risque.' },
           { t: 'Agents IA sur mesure', d: 'Des agents adaptés à vos données métier, qui répondent en langage naturel.' },
           { t: 'Analytique prédictive', d: 'Prévisions et modèles de machine learning intégrés à vos rapports et processus.' },
-          { t: 'Déploiement responsable', d: 'Garde-fous, évaluation et conduite du changement pour une adoption durable.' },
+          { t: 'Mise en production et suivi', d: 'Un déploiement sécurisé sur Azure, avec évaluation et supervision une fois en service.' },
         ],
-        outcomes: ['Une IA ancrée dans des données fiables', 'Des preuves de valeur en quelques semaines', 'Des équipes à l’aise avec l’IA au quotidien'],
+        outcomes: ['Une IA ancrée dans des données fiables', 'Des preuves de valeur en quelques semaines', 'Une IA conçue pour vos processus, pas un outil générique'],
         stack: ['Azure OpenAI', 'Copilot Studio', 'Fabric Data Agents', 'Azure AI Foundry', 'Python', 'ML'],
       },
       {
@@ -194,17 +194,68 @@ export const fr: Copy = {
         kind: 'training',
         name: 'Formation',
         tag: 'Montée en compétences',
-        short: 'Formations pratiques Microsoft Fabric, Power BI et Microsoft 365, animées par des consultants de terrain.',
+        short: 'Formations pratiques en IA, Claude, ChatGPT, Power BI, Microsoft Fabric et Microsoft 365, animées par des consultants de terrain.',
         intro:
           'Ce ne sont pas les outils qui transforment une entreprise, mais les personnes qui les maîtrisent. Nos formateurs sont des consultants en activité : chaque session s’appuie sur des projets réels. Nous adaptons chaque programme à votre équipe, à vos données et à votre niveau.',
         deliverables: [
-          { t: 'Formation Power BI', d: 'Modélisation, DAX, bonnes pratiques de visualisation, gouvernance et pipelines de déploiement.' },
-          { t: 'Formation Microsoft Fabric', d: 'Data engineering, entrepôt de données, analytique temps réel et IA dans un seul environnement.' },
+          { t: 'Formations IA', d: 'Les fondamentaux de l’IA pour les équipes métier, et des formations dédiées à Claude et à ChatGPT / Codex.' },
+          { t: 'Formations Power BI et Fabric', d: 'Modélisation, DAX, data engineering, entrepôt de données et gouvernance sur la plateforme data Microsoft.' },
           { t: 'Formation Microsoft 365', d: 'Teams, SharePoint, Outlook, OneDrive et l’ensemble de l’écosystème Microsoft 365.' },
           { t: 'Programmes sur mesure', d: 'À distance ou sur site, en français ou en anglais, à partir de vos propres données.' },
         ],
         outcomes: ['Des équipes autonomes sur leurs outils', 'Une adoption plus rapide de votre plateforme', 'Des compétences qui restent en interne'],
-        stack: ['Power BI', 'Microsoft Fabric', 'Microsoft 365', 'DAX', 'Copilot'],
+        stack: ['Claude', 'ChatGPT', 'Copilot', 'Power BI', 'Microsoft Fabric', 'Microsoft 365'],
+      },
+      {
+        slug: 'ai-training',
+        kind: 'training',
+        name: 'Formation Intelligence Artificielle',
+        tag: 'Formation',
+        short: 'L’IA expliquée et pratiquée : ce que l’IA générative sait faire ou non, comment bien formuler ses demandes et comment l’utiliser en toute sécurité au quotidien.',
+        intro:
+          'Une introduction pratique à l’intelligence artificielle pour les équipes métier et les dirigeants. Sans jargon ni code : chacun comprend comment fonctionne l’IA moderne, où elle aide, où elle échoue, et s’exerce sur des tâches de son propre métier pour que les bons réflexes durent après la session.',
+        deliverables: [
+          { t: 'Fondamentaux de l’IA', d: 'Le fonctionnement de l’IA générative et des grands modèles de langage, en termes simples, et ce que cela change pour votre activité.' },
+          { t: 'Des prompts efficaces', d: 'Des techniques claires pour obtenir des réponses justes et utiles, pratiquées sur des tâches réelles.' },
+          { t: 'Cas d’usage par métier', d: 'Rédaction, analyse, recherche, réunions et reporting : là où l’IA fait gagner du temps dans chaque fonction.' },
+          { t: 'Usage sûr et responsable', d: 'Données confidentielles, vérification des réponses, biais et règles à suivre par vos équipes.' },
+        ],
+        outcomes: ['Une compréhension commune de l’IA dans l’entreprise', 'Des collaborateurs qui utilisent l’IA avec confiance et esprit critique', 'Des règles claires sur ce qui peut être partagé'],
+        stack: ['Microsoft 365 Copilot', 'Claude', 'ChatGPT', 'Copilot Studio', 'Azure OpenAI'],
+      },
+      {
+        slug: 'claude-training',
+        kind: 'training',
+        name: 'Formation Claude',
+        tag: 'Formation',
+        short: 'Tirez le meilleur de Claude : de la rédaction et de l’analyse au quotidien jusqu’aux projets, aux outils connectés et à Claude Code pour les équipes techniques.',
+        intro:
+          'Claude est l’un des assistants IA les plus performants, et la plupart des équipes n’en utilisent qu’une fraction. Cette formation pratique montre aux utilisateurs métier comment travailler avec Claude sur leurs documents, leurs données et leurs recherches, et aux équipes techniques comment développer avec Claude Code. Les sessions sont adaptées à vos métiers et s’appuient sur vos propres contenus.',
+        deliverables: [
+          { t: 'Travailler avec Claude', d: 'Prompts, documents longs, analyse et rédaction dans votre propre ton.' },
+          { t: 'Projets et travail réutilisable', d: 'Mettre en place des projets partagés, des instructions et une base de connaissances pour des résultats reproductibles dans l’équipe.' },
+          { t: 'Outils connectés', d: 'Connecter Claude à vos fichiers, vos données et vos applications métier pour qu’il travaille avec le bon contexte.' },
+          { t: 'Claude Code pour les développeurs', d: 'Utiliser Claude Code pour écrire, relire et livrer plus vite du logiciel et des pipelines de données.' },
+        ],
+        outcomes: ['Des équipes qui confient un vrai travail à Claude', 'Des prompts et projets partagés plutôt que des conversations isolées', 'Des développeurs qui livrent plus vite avec Claude Code'],
+        stack: ['Claude', 'Claude Code', 'Projets', 'Connecteurs', 'API Claude'],
+      },
+      {
+        slug: 'chatgpt-training',
+        kind: 'training',
+        name: 'Formation ChatGPT et Codex',
+        tag: 'Formation',
+        short: 'Une formation ChatGPT pratique pour les équipes métier, et Codex pour les développeurs : meilleurs prompts, GPT personnalisés, analyse de données et développement plus rapide.',
+        intro:
+          'La plupart des gens utilisent ChatGPT comme un moteur de recherche. Cette formation montre à vos équipes comment en obtenir un travail fiable et de qualité, comment créer des GPT personnalisés pour les tâches récurrentes, et comment les développeurs peuvent utiliser Codex pour écrire, tester et relire du code. Les sessions sont adaptées à vos métiers et s’appuient sur vos propres contenus.',
+        deliverables: [
+          { t: 'ChatGPT au quotidien', d: 'Prompts, rédaction, synthèse et recherche, avec des habitudes qui donnent des résultats fiables.' },
+          { t: 'Analyse de données', d: 'Analyser des tableurs et des fichiers, créer des graphiques et vérifier les chiffres.' },
+          { t: 'GPT personnalisés', d: 'Créer et partager des assistants adaptés à vos processus et à vos documents.' },
+          { t: 'Codex pour les développeurs', d: 'Utiliser Codex pour écrire, tester et relire du code, du correctif rapide aux tâches plus lourdes.' },
+        ],
+        outcomes: ['De meilleurs résultats avec les outils déjà en place', 'Des GPT réutilisables pour les tâches récurrentes', 'Des développeurs qui livrent plus vite avec Codex'],
+        stack: ['ChatGPT', 'GPT personnalisés', 'Codex', 'API OpenAI', 'Azure OpenAI'],
       },
       {
         slug: 'power-bi-training',
@@ -292,28 +343,28 @@ export const fr: Copy = {
         stack: ['Azure OpenAI', 'Copilot Studio', 'Fabric Data Agents', 'Microsoft Teams'],
       },
       {
-        slug: 'executive-cockpit',
+        slug: 'executive-dashboards',
         kind: 'product',
-        name: 'Cockpit de direction',
+        name: 'Tableaux de bord de direction',
         tag: 'Produit',
-        short: 'Toute votre activité sur un seul écran. Chiffre d’affaires, marge, trésorerie et opérations dans un cockpit Power BI conçu pour la direction.',
+        short: 'Toute votre activité sur un seul écran. Chiffre d’affaires, marge, trésorerie et opérations dans des tableaux de bord Power BI conçus pour la direction.',
         intro:
-          'Le Cockpit de direction offre à votre comité de direction une vision unique et fiable de l’activité. Nous connectons vos systèmes clés, validons avec vous les KPI qui comptent et livrons un cockpit qui répond aux questions du lundi matin avant qu’elles ne soient posées.',
+          'Nos tableaux de bord de direction offrent à votre comité de direction une vision unique et fiable de l’activité. Nous connectons vos systèmes clés, validons avec vous les KPI qui comptent et livrons des tableaux de bord qui répondent aux questions du lundi matin avant qu’elles ne soient posées.',
         deliverables: [
           { t: 'Référentiel de KPI', d: 'Nous définissons et documentons les quelques indicateurs avec lesquels la direction pilote réellement.' },
           { t: 'Données connectées', d: 'Finance, ventes et opérations consolidées dans un modèle unique et gouverné.' },
-          { t: 'Conception du cockpit', d: 'Une expérience Power BI claire, rapide et mobile, avec accès au détail.' },
+          { t: 'Conception des tableaux de bord', d: 'Une expérience Power BI claire, rapide et mobile, avec accès au détail.' },
           { t: 'Alertes et commentaires', d: 'Seuils, abonnements et synthèses par IA pour que les écarts viennent à vous.' },
         ],
         outcomes: ['Une seule version de la vérité dans chaque réunion', 'Des décisions prises sur les données de la semaine', 'Moins de temps passé à préparer des présentations'],
         stack: ['Power BI', 'Microsoft Fabric', 'Copilot', 'Mobile'],
       },
       {
-        slug: 'finance-analytics',
+        slug: 'finance-dashboards',
         kind: 'product',
-        name: 'Analytique financière',
+        name: 'Tableaux de bord financiers',
         tag: 'Produit',
-        short: 'Compte de résultat, budget vs réalisé et trésorerie connectés à votre ERP, actualisés automatiquement et prêts pour la clôture.',
+        short: 'Des tableaux de bord financiers : compte de résultat, budget vs réalisé et trésorerie, connectés à votre ERP, actualisés automatiquement et prêts pour la clôture.',
         intro:
           'Notre solution d’analytique financière remplace les tableurs de clôture par un modèle de reporting gouverné. Compte de résultat, bilan, trésorerie et analyse des écarts sont actualisés automatiquement depuis votre ERP : la finance consacre son temps à expliquer les chiffres, plus à les assembler.',
         deliverables: [
@@ -385,7 +436,7 @@ export const fr: Copy = {
   },
   products: {
     eyebrow: 'Solutions',
-    title: 'Des solutions éprouvées, adaptées à',
+    title: 'Tableaux de bord et solutions IA, adaptés à',
     titleEm: 'vos données.',
   },
   showcase: {

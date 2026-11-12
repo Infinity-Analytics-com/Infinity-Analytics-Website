@@ -175,7 +175,7 @@ export const en = {
       {
         slug: 'ai-consultancy',
         kind: 'service',
-        name: 'AI Consultancy',
+        name: 'Custom AI Development',
         tag: 'Intelligence',
         short: 'From use-case discovery to production: custom AI agents, copilots and predictive models grounded in your own data.',
         intro:
@@ -184,9 +184,9 @@ export const en = {
           { t: 'AI opportunity assessment', d: 'A prioritised shortlist of use cases with expected value, effort and risk.' },
           { t: 'Custom AI agents', d: 'Agents tailored to your business data that answer questions in plain language.' },
           { t: 'Predictive analytics', d: 'Forecasting and machine-learning models wired into your reports and processes.' },
-          { t: 'Responsible rollout', d: 'Guardrails, evaluation and change management so adoption sticks.' },
+          { t: 'Production and monitoring', d: 'Secure deployment on Azure, with evaluation and monitoring once it is live.' },
         ],
-        outcomes: ['AI that is grounded in trusted data', 'Proofs of value in weeks, not quarters', 'Teams confident using AI day to day'],
+        outcomes: ['AI that is grounded in trusted data', 'Proofs of value in weeks, not quarters', 'AI built for your processes, not a generic tool'],
         stack: ['Azure OpenAI', 'Copilot Studio', 'Fabric Data Agents', 'Azure AI Foundry', 'Python', 'ML'],
       },
       {
@@ -194,17 +194,68 @@ export const en = {
         kind: 'training',
         name: 'Training',
         tag: 'Enablement',
-        short: 'Hands-on Microsoft Fabric, Power BI and Microsoft 365 training led by consultants with real project experience.',
+        short: 'Hands-on training in AI, Claude, ChatGPT, Power BI, Microsoft Fabric and Microsoft 365, led by consultants with real project experience.',
         intro:
           'Tools do not change a business, skilled people do. Our instructors are practising consultants, so every session is grounded in real projects. We tailor each programme to your team, your data and your level.',
         deliverables: [
-          { t: 'Power BI training', d: 'Data modelling, DAX, visualisation best practices, governance and deployment pipelines.' },
-          { t: 'Microsoft Fabric training', d: 'Data engineering, warehousing, real-time analytics and AI in one environment.' },
+          { t: 'AI training', d: 'AI fundamentals for business teams, plus dedicated Claude and ChatGPT / Codex courses.' },
+          { t: 'Power BI and Fabric training', d: 'Data modelling, DAX, data engineering, warehousing and governance on the Microsoft data stack.' },
           { t: 'Microsoft 365 training', d: 'Teams, SharePoint, Outlook, OneDrive and the wider Microsoft 365 ecosystem.' },
           { t: 'Custom programmes', d: 'Remote or on-site, in English or French, built around your own data.' },
         ],
         outcomes: ['Teams that are autonomous on their tools', 'Faster adoption of your platform', 'Skills that stay in-house'],
-        stack: ['Power BI', 'Microsoft Fabric', 'Microsoft 365', 'DAX', 'Copilot'],
+        stack: ['Claude', 'ChatGPT', 'Copilot', 'Power BI', 'Microsoft Fabric', 'Microsoft 365'],
+      },
+      {
+        slug: 'ai-training',
+        kind: 'training',
+        name: 'Artificial Intelligence Training',
+        tag: 'Course',
+        short: 'AI explained and practised: what generative AI can and cannot do, how to prompt well, and how to use it safely in everyday work.',
+        intro:
+          'A practical introduction to artificial intelligence for business teams and leaders. No jargon and no coding required: people learn how modern AI works, where it helps, where it fails, and practise on tasks from their own job so the habits last after the session.',
+        deliverables: [
+          { t: 'AI fundamentals', d: 'How generative AI and large language models work, in plain language, and what that means for your business.' },
+          { t: 'Prompting that works', d: 'Clear techniques to get accurate, useful answers, practised on real tasks.' },
+          { t: 'Use cases by role', d: 'Writing, analysis, research, meetings and reporting: where AI saves time in each function.' },
+          { t: 'Safe and responsible use', d: 'Confidential data, checking answers, bias and the rules your teams should follow.' },
+        ],
+        outcomes: ['A shared understanding of AI across the company', 'People who use AI confidently and critically', 'Clear rules on what is safe to share'],
+        stack: ['Microsoft 365 Copilot', 'Claude', 'ChatGPT', 'Copilot Studio', 'Azure OpenAI'],
+      },
+      {
+        slug: 'claude-training',
+        kind: 'training',
+        name: 'Claude Training',
+        tag: 'Course',
+        short: 'Get the most out of Claude: from everyday writing and analysis to projects, connected tools and Claude Code for technical teams.',
+        intro:
+          'Claude is one of the most capable AI assistants available, and most teams use a fraction of it. This hands-on training shows business users how to work with Claude on documents, data and research, and shows technical teams how to build with Claude Code. Sessions are tailored to your roles and run on your own material.',
+        deliverables: [
+          { t: 'Working with Claude', d: 'Prompting, long documents, analysis and writing in your own tone of voice.' },
+          { t: 'Projects and reusable work', d: 'Set up shared projects, instructions and knowledge so good results are repeatable across the team.' },
+          { t: 'Connected tools', d: 'Connect Claude to your files, data and business apps so it works with real context.' },
+          { t: 'Claude Code for developers', d: 'Use Claude Code to write, review and ship software and data pipelines faster.' },
+        ],
+        outcomes: ['Teams that delegate real work to Claude', 'Shared prompts and projects instead of one-off chats', 'Developers shipping faster with Claude Code'],
+        stack: ['Claude', 'Claude Code', 'Projects', 'Connectors', 'Claude API'],
+      },
+      {
+        slug: 'chatgpt-training',
+        kind: 'training',
+        name: 'ChatGPT and Codex Training',
+        tag: 'Course',
+        short: 'Hands-on ChatGPT training for business teams, and Codex for developers: better prompts, custom GPTs, data analysis and faster software delivery.',
+        intro:
+          'Most people use ChatGPT like a search box. This training shows your teams how to get reliable, high-quality work out of it, how to build custom GPTs for recurring tasks, and how developers can use Codex to write, test and review code. Sessions are tailored to your roles and run on your own material.',
+        deliverables: [
+          { t: 'ChatGPT for everyday work', d: 'Prompting, writing, summarising and research, with habits that produce reliable results.' },
+          { t: 'Data analysis', d: 'Analyse spreadsheets and files, build charts and check the numbers.' },
+          { t: 'Custom GPTs', d: 'Build and share assistants tailored to your processes and documents.' },
+          { t: 'Codex for developers', d: 'Use Codex to write, test and review code, from quick fixes to larger tasks.' },
+        ],
+        outcomes: ['Better results from the tools people already use', 'Reusable GPTs for recurring tasks', 'Developers who deliver faster with Codex'],
+        stack: ['ChatGPT', 'Custom GPTs', 'Codex', 'OpenAI API', 'Azure OpenAI'],
       },
       {
         slug: 'power-bi-training',
@@ -292,28 +343,28 @@ export const en = {
         stack: ['Azure OpenAI', 'Copilot Studio', 'Fabric Data Agents', 'Microsoft Teams'],
       },
       {
-        slug: 'executive-cockpit',
+        slug: 'executive-dashboards',
         kind: 'product',
-        name: 'Executive Cockpit',
+        name: 'Executive Dashboards',
         tag: 'Product',
-        short: 'Your whole business on one screen. Revenue, margin, cash and operations in a single Power BI cockpit built for leadership.',
+        short: 'Your whole business on one screen. Revenue, margin, cash and operations in Power BI dashboards built for leadership.',
         intro:
-          'The Executive Cockpit gives your leadership team one trusted view of the business. We connect your key systems, agree the KPIs that matter and deliver a cockpit that answers the Monday-morning questions before anyone asks them.',
+          'Our executive dashboards give your leadership team one trusted view of the business. We connect your key systems, agree the KPIs that matter and deliver dashboards that answer the Monday-morning questions before anyone asks them.',
         deliverables: [
           { t: 'KPI framework', d: 'We define and document the handful of indicators leadership will actually steer by.' },
           { t: 'Connected data', d: 'Finance, sales and operations data consolidated into one governed model.' },
-          { t: 'Cockpit design', d: 'A clear, fast, mobile-ready Power BI experience with drill-down to the detail.' },
+          { t: 'Dashboard design', d: 'A clear, fast, mobile-ready Power BI experience with drill-down to the detail.' },
           { t: 'Alerts & commentary', d: 'Thresholds, subscriptions and AI summaries so exceptions find you first.' },
         ],
         outcomes: ['One version of the truth in every meeting', 'Decisions taken on this week’s data', 'Less time building slides'],
         stack: ['Power BI', 'Microsoft Fabric', 'Copilot', 'Mobile'],
       },
       {
-        slug: 'finance-analytics',
+        slug: 'finance-dashboards',
         kind: 'product',
-        name: 'Finance Analytics',
+        name: 'Finance Dashboards',
         tag: 'Product',
-        short: 'P&L, budget versus actual and cash flow connected to your ERP, refreshed automatically and ready for month end.',
+        short: 'Finance dashboards for P&L, budget versus actual and cash flow, connected to your ERP, refreshed automatically and ready for month end.',
         intro:
           'Finance Analytics replaces manual month-end spreadsheets with a governed reporting model. Your P&L, balance sheet, cash and variance analysis are refreshed automatically from your ERP, so finance spends its time explaining the numbers, not assembling them.',
         deliverables: [
@@ -385,7 +436,7 @@ export const en = {
   },
   products: {
     eyebrow: 'Solutions',
-    title: 'Proven solutions, tailored to',
+    title: 'Dashboards and AI solutions, tailored to',
     titleEm: 'your data.',
   },
   showcase: {
