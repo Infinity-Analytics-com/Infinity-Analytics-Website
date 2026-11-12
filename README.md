@@ -41,7 +41,7 @@ the contact address in `src/site.ts`.
 
 ## Analytics and conversion tracking
 
-Set `PUBLIC_GA_ID` to a Google Analytics 4 measurement ID. On GitHub Pages, add it as the repository variable
+The GA4 measurement ID is set in `.github/workflows/deploy.yml`. To override it, add the repository variable
 `GA_MEASUREMENT_ID` (and the form URL as `FORM_ENDPOINT`) under Settings > Secrets and variables > Actions > Variables.
 
 - Analytics loads only after the visitor accepts the cookie banner. Without an ID there is no script and no banner.
