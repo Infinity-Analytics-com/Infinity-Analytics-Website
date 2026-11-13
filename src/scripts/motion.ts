@@ -11,10 +11,12 @@ const finePointer = matchMedia('(pointer: fine)').matches;
 const $$ = <T extends Element = HTMLElement>(s: string, root: ParentNode = document) => [...root.querySelectorAll<T>(s)];
 
 /* ---- smooth scrolling ---- */
+let lenis: Lenis | null = null;
 if (!reduced) {
-  const lenis = new Lenis({ duration: 1.1, anchors: { offset: -80 } });
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add((t) => lenis.raf(t * 1000));
+  lenis = new Lenis({ duration: 1.1, anchors: { offset: -80 } });
+  const l = lenis;
+  l.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((t) => l.raf(t * 1000));
   gsap.ticker.lagSmoothing(0);
 }
 
@@ -204,7 +206,28 @@ $$('[data-showcase]').forEach((sc) => {
     prev.disabled = track.scrollLeft < 8;
     next.disabled = track.scrollLeft > track.scrollWidth - track.clientWidth - 8;
   };
-  const go = (dir: number) => track.scrollBy({ left: dir * step(), behavior: reduced ? 'auto' : 'smooth' });
+  // On desktop the carousel is driven by the page scroll: the section pins while the slides pass.
+  const SPEED = 0.55; // page pixels scrolled per pixel of carousel travel
+  const linked = !reduced && finePointer && matchMedia('(min-width: 64rem)').matches && track.scrollWidth - track.clientWidth > 40;
+  const go = (dir: number) => {
+    if (!linked) return track.scrollBy({ left: dir * step(), behavior: reduced ? 'auto' : 'smooth' });
+    const y = scrollY + dir * step() * SPEED;
+    if (lenis) lenis.scrollTo(y, { duration: 0.9 });
+    else scrollTo({ top: y });
+  };
+  if (linked) {
+    track.classList.add('is-linked');
+    const max = () => track.scrollWidth - track.clientWidth;
+    ScrollTrigger.create({
+      trigger: track,
+      start: 'center center',
+      end: () => `+=${max() * SPEED}`,
+      pin: sc,
+      scrub: 0.6,
+      invalidateOnRefresh: true,
+      onUpdate: (self) => (track.scrollLeft = self.progress * max()),
+    });
+  }
   prev.addEventListener('click', () => go(-1));
   next.addEventListener('click', () => go(1));
   track.addEventListener('scroll', update, { passive: true });
@@ -215,7 +238,7 @@ $$('[data-showcase]').forEach((sc) => {
   // drag to scroll with a mouse
   let down = false, startX = 0, startLeft = 0;
   track.addEventListener('pointerdown', (e) => {
-    if (e.pointerType !== 'mouse') return;
+    if (e.pointerType !== 'mouse' || linked) return;
     down = true; startX = e.clientX; startLeft = track.scrollLeft;
   });
   addEventListener('pointermove', (e) => {

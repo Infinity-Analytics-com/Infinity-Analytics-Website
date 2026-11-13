@@ -1,11 +1,11 @@
 ---
 // Horizontal carousel of showcase concepts (see src/mocks.ts).
 // To use real project screenshots, replace a slide's <Fragment set:html> with an <img>.
-import { mocks, showcaseFor } from '@/mocks';
+import { showcase } from '@/mocks';
 import type { Copy } from '@/i18n/en';
 interface Props { t: Copy; page: string }
 const { t, page } = Astro.props;
-const ids = showcaseFor[page] ?? showcaseFor.home;
+const ids = showcase[page] ?? showcase.home;
 const s = t.showcase;
 ---
 <section class="section !pt-0 showcase" data-showcase>
@@ -23,8 +23,7 @@ const s = t.showcase;
     </div>
   </div>
   <div class="sc-track mt-12" data-sc-track data-lenis-prevent-touch tabindex="0" role="group" aria-label={s.eyebrow}>
-    {ids.map((id, i) => {
-      const m = mocks[id];
+    {ids.map((m, i) => {
       return (
         <figure class="sc-slide" data-reveal>
           <div class="sc-window">

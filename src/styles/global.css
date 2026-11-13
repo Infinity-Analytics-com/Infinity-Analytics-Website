@@ -965,3 +965,10 @@ html.js .split .w > span {
   flex-shrink: 0;
   white-space: nowrap;
 }
+
+/* carousel driven by the page scroll (desktop) */
+.sc-track.is-linked {
+  overflow-x: hidden;
+  scroll-snap-type: none;
+  cursor: default;
+}

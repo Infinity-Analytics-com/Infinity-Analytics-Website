@@ -5,7 +5,7 @@ import Arrow from '@/components/Arrow.astro';
 import CTA from '@/components/CTA.astro';
 import ServiceViz from '@/components/ServiceViz.astro';
 import Showcase from '@/components/Showcase.astro';
-import { mocks, showcaseFor } from '@/mocks';
+import { showcase } from '@/mocks';
 import { getCopy, href, itemHref, itemPath, type Lang } from '@/i18n';
 interface Props { lang: Lang; slug: string }
 const { lang, slug } = Astro.props;
@@ -38,7 +38,7 @@ const back =
       </div>
       <div class="card p-4" data-reveal>
         {s.kind === 'product'
-          ? <div class="viz mockviz" set:html={mocks[showcaseFor[s.slug][0]].svg} />
+          ? <div class="viz mockviz" set:html={showcase[s.slug][0].svg} />
           : <div class="[&_.viz]:h-56 md:[&_.viz]:h-64"><ServiceViz slug={s.kind === 'training' ? 'training' : s.slug} /></div>}
       </div>
     </div>
