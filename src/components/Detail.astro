@@ -39,7 +39,7 @@ const back =
       <div class="card p-4" data-reveal>
         {s.kind === 'product'
           ? <div class="viz mockviz" set:html={showcase[s.slug][0].svg} />
-          : <div class="[&_.viz]:h-56 md:[&_.viz]:h-64"><ServiceViz slug={s.kind === 'training' ? 'training' : s.slug} /></div>}
+          : <div class="[&_.viz]:h-56 md:[&_.viz]:h-64"><ServiceViz slug={s.slug} /></div>}
       </div>
     </div>
   </section>
@@ -99,7 +99,7 @@ const back =
     </div>
   </section>
 
-  <Showcase t={t} page={s.slug} />
+  {s.kind !== 'training' && <Showcase t={t} page={s.slug} />}
 
-  <CTA lang={lang} t={t} />
+  <CTA lang={lang} t={t} page={s.slug} />
 </Base>

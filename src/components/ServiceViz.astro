@@ -89,6 +89,136 @@ const V = '#8B5CFF', A = '#FEB85D', L = 'rgba(255,255,255,.14)', T = 'rgba(255,2
       ))}
     </svg>
   )}
+  {slug === 'ai-training' && (
+    <svg viewBox="0 0 320 150" preserveAspectRatio="xMidYMid meet">
+      <rect x="18" y="40" width="104" height="70" rx="10" fill="rgba(255,255,255,.03)" stroke={L} />
+      <text x="30" y="58" fill={T} font-size="9" font-family="monospace">PROMPT</text>
+      {[84, 66, 76].map((w, i) => <rect x="30" y={68 + i * 12} width={w} height="5" rx="2.5" fill={V} opacity={0.9 - i * 0.2} />)}
+      <path class="dash" d="M122 75 H146 M174 75 H198" stroke={V} stroke-width="1.5" />
+      <g class="pulse" style="animation-duration:3s">
+        <path d="M160 53 C162 68,167 73,182 75 C167 77,162 82,160 97 C158 82,153 77,138 75 C153 73,158 68,160 53 Z" fill={A} />
+      </g>
+      <circle class="pulse" style="animation-delay:.8s" cx="181" cy="52" r="2.5" fill={A} />
+      <circle class="pulse" style="animation-delay:1.4s" cx="141" cy="98" r="2" fill={V} />
+      <rect x="198" y="26" width="104" height="98" rx="10" fill="rgba(139,92,255,.12)" stroke={V} stroke-width="1.2" />
+      <text x="210" y="44" fill={T} font-size="9" font-family="monospace">ANSWER</text>
+      {[78, 64, 72, 50].map((w, i) => <rect class="bar" style={`transform-origin:left;animation-name:growx;animation-delay:${i * 0.35}s`} x="210" y={54 + i * 13} width={w} height="5" rx="2.5" fill="#fff" opacity=".8" />)}
+      <circle cx="216" cy="112" r="6" fill="rgba(254,184,93,.18)" stroke={A} />
+      <path d="M213 112 l2.4 2.4 l4 -4.6" fill="none" stroke={A} stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+      <text x="228" y="115" fill={T} font-size="8" font-family="monospace">Checked</text>
+    </svg>
+  )}
+  {slug === 'claude-training' && (
+    <svg viewBox="0 0 320 150" preserveAspectRatio="xMidYMid meet">
+      <path d="M26 18 H78 L96 36 V104 H26 Z" fill="rgba(255,255,255,.03)" stroke={L} />
+      <path d="M78 18 V36 H96" fill="none" stroke={L} />
+      {[52, 56, 44, 56, 38, 50].map((w, i) => <rect x="34" y={44 + i * 9} width={w} height="3.5" rx="1.75" fill="#fff" opacity=".28" />)}
+      <text x="34" y="33" fill={T} font-size="8" font-family="monospace">84 p.</text>
+      <path class="dash" d="M100 61 H132" stroke={V} stroke-width="1.5" />
+      <rect x="134" y="14" width="168" height="94" rx="12" fill="rgba(139,92,255,.12)" stroke={V} stroke-width="1.2" />
+      <g class="pulse" style="animation-duration:3.2s">
+        {[0, 30, 60, 90, 120, 150].map((r) => <line x1="143" x2="161" y1="32" y2="32" stroke={A} stroke-width="2.2" stroke-linecap="round" transform={`rotate(${r} 152 32)`} />)}
+      </g>
+      <text x="170" y="36" fill="#fff" font-size="10" font-family="monospace">Summary</text>
+      {[['Fit', 104], ['Deadline', 86], ['Risk', 96]].map(([n, w], i) => (
+        <g>
+          <circle class="pulse" style={`animation-delay:${i * 0.4}s`} cx="150" cy={58 + i * 16} r="3" fill={i === 2 ? A : V} />
+          <text x="160" y={61 + i * 16} fill={T} font-size="8" font-family="monospace">{n}</text>
+          <rect class="bar" style={`transform-origin:left;animation-name:growx;animation-delay:${i * 0.4}s`} x="204" y={55 + i * 16} width={Number(w) - 18} height="5" rx="2.5" fill="#fff" opacity=".7" />
+        </g>
+      ))}
+      <rect x="26" y="116" width="276" height="24" rx="8" fill="rgba(0,0,0,.35)" stroke={L} />
+      <text x="38" y="132" fill={A} font-size="10" font-family="monospace">$</text>
+      <text x="50" y="132" fill="#fff" font-size="10" font-family="monospace">claude "add tests for the export"</text>
+      <rect class="pulse" style="animation-duration:1.2s" x="246" y="123" width="6" height="11" fill={V} />
+    </svg>
+  )}
+  {slug === 'chatgpt-training' && (
+    <svg viewBox="0 0 320 150" preserveAspectRatio="xMidYMid meet">
+      <rect x="58" y="20" width="84" height="24" rx="12" fill={V} />
+      {[58].map((w) => <rect x="71" y="29.5" width={w} height="5" rx="2.5" fill="#fff" opacity=".9" />)}
+      <rect x="18" y="52" width="112" height="52" rx="12" fill="rgba(255,255,255,.04)" stroke={L} />
+      {[86, 74, 80, 46].map((w, i) => <rect class="bar" style={`transform-origin:left;animation-name:growx;animation-delay:${i * 0.3}s`} x="30" y={62 + i * 10} width={w} height="4.5" rx="2.25" fill="#fff" opacity=".55" />)}
+      <rect x="18" y="112" width="124" height="24" rx="12" fill="rgba(255,255,255,.03)" stroke={L} />
+      <text x="32" y="128" fill={T} font-size="9" font-family="monospace">Ask anything</text>
+      <circle class="pulse" cx="128" cy="124" r="6" fill={A} />
+      <rect x="160" y="14" width="144" height="122" rx="10" fill="rgba(0,0,0,.35)" stroke={V} stroke-width="1.2" />
+      {[0, 1, 2].map((i) => <circle cx={172 + i * 9} cy="26" r="2.5" fill={i === 0 ? A : 'rgba(255,255,255,.25)'} />)}
+      <text x="246" y="29" fill={T} font-size="8" font-family="monospace">codex</text>
+      <line x1="160" x2="304" y1="36" y2="36" stroke={L} />
+      {[[0, 70, V], [10, 92, '#fff'], [10, 60, '#fff'], [20, 76, A], [10, 48, '#fff'], [0, 30, V]].map(([dx, w, c], i) => (
+        <g>
+          <text x="168" y={52 + i * 12} fill="rgba(255,255,255,.3)" font-size="7" font-family="monospace">{i + 1}</text>
+          <rect class="bar" style={`transform-origin:left;animation-name:growx;animation-delay:${i * 0.25}s`} x={180 + Number(dx)} y={47 + i * 12} width={w} height="4.5" rx="2.25" fill={String(c)} opacity={c === '#fff' ? 0.5 : 0.95} />
+        </g>
+      ))}
+      <circle class="pulse" cx="174" cy="124" r="3.5" fill="#4ADE80" />
+      <text x="184" y="127" fill={T} font-size="8" font-family="monospace">3 tests passed</text>
+    </svg>
+  )}
+  {slug === 'power-bi-training' && (
+    <svg viewBox="0 0 320 150" preserveAspectRatio="xMidYMid meet">
+      <rect x="18" y="14" width="284" height="26" rx="8" fill="rgba(0,0,0,.35)" stroke={L} />
+      <text x="30" y="31" fill={A} font-size="9.5" font-family="monospace">Sales YTD =</text>
+      <text x="100" y="31" fill="#fff" font-size="9.5" font-family="monospace">TOTALYTD ( [Sales], 'Date'[Date] )</text>
+      {[[42, 62, 'Date'], [42, 126, 'Store'], [150, 62, 'Product'], [150, 126, 'Client']].map(([x, y, n]) => (
+        <g>
+          <line class="dash" x1={x} y1={y} x2="96" y2="94" stroke={V} stroke-width="1.2" />
+          <rect x={Number(x) - 24} y={Number(y) - 9} width="48" height="18" rx="6" fill="#120d30" stroke={L} />
+          <text x={x} y={Number(y) + 3} text-anchor="middle" fill={T} font-size="8" font-family="monospace">{n}</text>
+        </g>
+      ))}
+      <g class="pulse" style="animation-duration:3.2s">
+        <rect x="70" y="82" width="52" height="24" rx="7" fill={A} />
+      </g>
+      <text x="96" y="97.5" text-anchor="middle" fill="#1b1440" font-size="9" font-weight="700" font-family="monospace">SALES</text>
+      <rect x="196" y="52" width="106" height="84" rx="10" fill="rgba(139,92,255,.12)" stroke={V} stroke-width="1.2" />
+      <text x="206" y="68" fill={T} font-size="8" font-family="monospace">Sales YTD</text>
+      <text x="206" y="84" fill="#fff" font-size="13" font-family="monospace">€36.4M</text>
+      {[14, 22, 18, 30, 26, 38].map((hgt, i) => <rect class="bar" style={`animation-delay:${i * 0.2}s`} x={207 + i * 15} y={128 - hgt} width="9" height={hgt} rx="3" fill={i === 5 ? A : V} />)}
+    </svg>
+  )}
+  {slug === 'fabric-training' && (
+    <svg viewBox="0 0 320 150" preserveAspectRatio="xMidYMid meet">
+      {[['Source', 'rgba(255,255,255,.5)'], ['Bronze', '#B4793C'], ['Silver', '#C9CEDA'], ['Gold', A], ['Report', V]].map(([n, c], i) => (
+        <g>
+          {i < 4 && <line class="dash" x1={54 + i * 60} y1="46" x2={86 + i * 60} y2="46" stroke={V} stroke-width="1.5" />}
+          <g class="pulse" style={`animation-delay:${i * 0.45}s;animation-duration:3s`}>
+            {i === 0 || i === 4
+              ? <rect x={26 + i * 60} y="32" width="28" height="28" rx="8" fill={`${i === 4 ? 'rgba(139,92,255,.25)' : 'rgba(255,255,255,.05)'}`} stroke={String(c)} stroke-width="1.3" />
+              : <path d={`M${40 + i * 60} 30 L${56 + i * 60} 46 L${40 + i * 60} 62 L${24 + i * 60} 46 Z`} fill={`${c}26`} stroke={String(c)} stroke-width="1.3" />}
+          </g>
+          <text x={40 + i * 60} y="80" text-anchor="middle" fill={T} font-size="8.5" font-family="monospace">{n}</text>
+        </g>
+      ))}
+      <rect x="18" y="94" width="284" height="42" rx="9" fill="rgba(0,0,0,.35)" stroke={L} />
+      <path d="M30 106 l7 4.5 l-7 4.5 Z" fill={A} />
+      <text x="44" y="113" fill="#fff" font-size="8.5" font-family="monospace">df = spark.read.table("bronze.orders")</text>
+      <text x="44" y="127" fill={T} font-size="8.5" font-family="monospace">df.write.saveAsTable("silver.orders")</text>
+      <rect class="pulse" style="animation-duration:1.2s" x="246" y="119" width="5" height="10" fill={V} />
+    </svg>
+  )}
+  {slug === 'microsoft-365-training' && (
+    <svg viewBox="0 0 320 150" preserveAspectRatio="xMidYMid meet">
+      {[['T', 'Teams', V], ['O', 'Outlook', '#5AA9FF'], ['W', 'Word', '#5AA9FF'], ['X', 'Excel', '#4ADE80'], ['S', 'SharePoint', '#2DD4BF'], ['C', 'Copilot', A]].map(([l, n, c], i) => (
+        <g>
+          <g class="pulse" style={`animation-delay:${i * 0.35}s;animation-duration:3.4s`}>
+            <rect x={22 + (i % 3) * 50} y={20 + Math.floor(i / 3) * 60} width="34" height="34" rx="9" fill={`${c}26`} stroke={String(c)} stroke-width="1.2" />
+          </g>
+          <text x={39 + (i % 3) * 50} y={42 + Math.floor(i / 3) * 60} text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="monospace">{l}</text>
+          <text x={39 + (i % 3) * 50} y={66 + Math.floor(i / 3) * 60} text-anchor="middle" fill={T} font-size="7" font-family="monospace">{n}</text>
+        </g>
+      ))}
+      <path class="dash" d="M160 67 H184" stroke={V} stroke-width="1.5" />
+      <rect x="186" y="16" width="116" height="118" rx="10" fill="rgba(255,255,255,.04)" stroke={L} />
+      <text x="196" y="33" fill={T} font-size="8" font-family="monospace">Budget.xlsx</text>
+      <circle cx="274" cy="30" r="6" fill={V} /><circle cx="286" cy="30" r="6" fill={A} stroke="#0b0822" stroke-width="1.5" />
+      <line x1="186" x2="302" y1="42" y2="42" stroke={L} />
+      {[0, 1, 2, 3, 4].map((r) => [0, 1, 2].map((c) => <rect x={196 + c * 34} y={50 + r * 16} width="28" height="10" rx="2.5" fill="rgba(255,255,255,.07)" />))}
+      <rect class="pulse" style="animation-duration:2.6s" x="230" y="66" width="28" height="10" rx="2.5" fill="none" stroke={V} stroke-width="1.6" />
+      <rect class="pulse" style="animation-duration:2.6s;animation-delay:1.3s" x="264" y="98" width="28" height="10" rx="2.5" fill="none" stroke={A} stroke-width="1.6" />
+    </svg>
+  )}
   {slug === 'sales-forecasting' && (
     <svg viewBox="0 0 320 150" preserveAspectRatio="xMidYMid meet">
       {[40, 75, 110].map((y) => <line x1="20" x2="300" y1={y} y2={y} stroke={L} stroke-dasharray="2 6" />)}
