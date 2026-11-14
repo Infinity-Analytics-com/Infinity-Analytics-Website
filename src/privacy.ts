@@ -105,7 +105,7 @@ export const privacy = {
       short: '',
       body: [
         'If you have questions or comments about this notice, you may email us at contact@infinity-analytics.com or by post to:',
-        'XYZ Services SARL, Résidence Abdelmoumen Center, Angle Bd Abdelmoumen et Bd Anoual, Etg 2, Bureau 202, 20042, Casablanca, Morocco',
+        'XYZ Services SARL, 26 Avenue Mers Sultan, Appt 3, Etage 1, 20000, Casablanca, Morocco',
       ],
     },
     {

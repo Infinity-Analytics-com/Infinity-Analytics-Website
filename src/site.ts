@@ -6,7 +6,7 @@ export const site = {
   phone: '+212 6 73 72 90 97',
   phoneHref: 'tel:+212673729097',
   whatsapp: 'https://wa.me/212673729097',
-  address: ['Résidence Abdelmoumen Center', 'Angle Bd Abdelmoumen et Bd Anoual', 'Étage 2, Bureau n°202', '20042 Casablanca, Morocco'],
+  address: ['26 Avenue Mers Sultan', 'Appt 3, Etage 1', '20000 Casablanca', 'Morocco'],
   formEndpoint: import.meta.env.PUBLIC_FORM_ENDPOINT ?? '',
   gaId: import.meta.env.PUBLIC_GA_ID ?? '',
 };
