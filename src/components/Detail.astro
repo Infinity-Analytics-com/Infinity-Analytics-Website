@@ -26,7 +26,7 @@ const back =
 <Base lang={lang} path={itemPath(s)} title={`${s.name} | Infinity Analytics`} description={s.short}>
   <section class="relative pt-40 pb-16 md:pt-48">
     <div class="hero-grid"></div>
-    <div class="wrap relative grid gap-12 lg:grid-cols-[1.25fr_1fr] lg:items-end">
+    <div class="wrap relative grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:items-center">
       <div>
         <a class="eyebrow hover:text-text transition-colors" href={back.to} data-reveal>← {back.label}</a>
         <h1 class="display split mt-7">{s.name}</h1>
@@ -39,7 +39,7 @@ const back =
       <div class="card p-4" data-reveal>
         {s.kind === 'product'
           ? <div class="viz mockviz" set:html={showcase[s.slug][0].svg} />
-          : <div class="[&_.viz]:h-56 md:[&_.viz]:h-64"><ServiceViz slug={s.slug} /></div>}
+          : <div class="viz-hero"><ServiceViz slug={s.slug} /></div>}
       </div>
     </div>
   </section>

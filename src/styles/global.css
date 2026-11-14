@@ -858,6 +858,11 @@ html.js .step:not(.is-active) p {
   position: static;
   display: block;
 }
+/* Detail page hero illustration: as wide as its card and tall enough to carry the hero. */
+.viz-hero .viz {
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
 
 /* ---------- cookie consent ---------- */
 .consent {
